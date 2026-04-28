@@ -66,7 +66,8 @@ export function EntityPage<K extends EntityKey>({ entity }: EntityPageProps<K>) 
   const parseRow = () => {
     const payload = fields.reduce<Record<string, string | number>>((acc, field) => {
       const rawValue = formValues[field.name] ?? "";
-      acc[field.name] = field.type === "number" ? Number(rawValue) : rawValue;
+      const isNumericField = field.type === "number" || field.name.endsWith("_id");
+      acc[field.name] = isNumericField ? Number(rawValue) : rawValue;
       return acc;
     }, {});
     return payload;

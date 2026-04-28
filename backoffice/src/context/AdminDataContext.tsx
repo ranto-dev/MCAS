@@ -142,6 +142,34 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    if (entity === "admin") {
+      try {
+        const response = await fetch(ADMINS_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec creation admin: ${response.status}`);
+        }
+
+        const created = (await response.json()) as ApiAdmin;
+        const createdAdmin = mapApiAdmin(created);
+
+        setData((prev) => ({
+          ...prev,
+          admin: [...prev.admin, createdAdmin],
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de creer l'admin via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => {
       const nextId = getNextId(prev[entity]);
       return {
