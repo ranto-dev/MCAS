@@ -1,22 +1,7 @@
 import type { DatabaseState } from "../types/entities";
 
 export const initialData: DatabaseState = {
-  etablissement: [
-    {
-      id: 1,
-      nom: "Clinique Sainte Marie",
-      region: "Analamanga",
-      contact: "+261 34 00 000 01",
-      categorie: "Clinique privee",
-    },
-    {
-      id: 2,
-      nom: "CHU Nord",
-      region: "Diana",
-      contact: "+261 34 00 000 02",
-      categorie: "Hopital public",
-    },
-  ],
+  etablissement: [],
   admin: [
     {
       id: 1,

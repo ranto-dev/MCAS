@@ -72,10 +72,10 @@ export function EntityPage<K extends EntityKey>({ entity }: EntityPageProps<K>) 
     return payload;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const payload = parseRow();
     if (mode === "create") {
-      createItem(entity, payload as Omit<DatabaseState[K][number], "id">);
+      await createItem(entity, payload as Omit<DatabaseState[K][number], "id">);
     }
     if (mode === "edit" && activeRow) {
       const merged = { ...activeRow, ...payload } as unknown as DatabaseState[K][number];
