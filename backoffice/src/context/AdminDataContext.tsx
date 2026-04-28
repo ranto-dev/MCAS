@@ -214,6 +214,34 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    if (entity === "personnel") {
+      try {
+        const response = await fetch(PERSONNEL_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec creation personnel: ${response.status}`);
+        }
+
+        const created = (await response.json()) as ApiPersonnel;
+        const createdPersonnel = mapApiPersonnel(created);
+
+        setData((prev) => ({
+          ...prev,
+          personnel: [...prev.personnel, createdPersonnel],
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de creer le personnel via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => {
       const nextId = getNextId(prev[entity]);
       return {
@@ -272,6 +300,56 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    if (entity === "personnel") {
+      const { id, nom, prenom, contact, poste, age, etablissement_id } = payload as Personnel;
+      try {
+        const response = await fetch(`${PERSONNEL_API_URL}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nom,
+            prenom,
+            contact,
+            poste,
+            age,
+            etablissement_id,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec modification personnel: ${response.status}`);
+        }
+
+        let updatedPersonnel: Personnel = {
+          id,
+          nom,
+          prenom,
+          contact,
+          poste,
+          age,
+          etablissement_id,
+        };
+
+        try {
+          const updatedFromApi = (await response.json()) as ApiPersonnel;
+          updatedPersonnel = mapApiPersonnel(updatedFromApi);
+        } catch {
+          // Certaines APIs PUT ne renvoient pas de JSON; on garde les donnees envoyees.
+        }
+
+        setData((prev) => ({
+          ...prev,
+          personnel: prev.personnel.map((row) => (row.id === id ? updatedPersonnel : row)),
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de modifier le personnel via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => ({
       ...prev,
       [entity]: prev[entity].map((row) => (row.id === payload.id ? payload : row)),
@@ -289,6 +367,20 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         console.error("Impossible de supprimer l'etablissement via l'API.", error);
+        return;
+      }
+    }
+
+    if (entity === "personnel") {
+      try {
+        const response = await fetch(`${PERSONNEL_API_URL}/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`Echec suppression personnel: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Impossible de supprimer le personnel via l'API.", error);
         return;
       }
     }
