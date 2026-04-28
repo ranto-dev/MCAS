@@ -1,0 +1,166 @@
+[
+  {
+    "maladie": "paludisme",
+    "symptomes": [
+      { "nom": "fièvre", "poids": 0.9 },
+      { "nom": "frissons", "poids": 0.8 },
+      { "nom": "fatigue", "poids": 0.6 }
+    ],
+    "conditions": { "zone_endemique": true },
+    "gravite": "élevée"
+  },
+  {
+    "maladie": "paludisme grave",
+    "symptomes": [
+      { "nom": "fièvre", "poids": 0.9 },
+      { "nom": "convulsion", "poids": 1.0 },
+      { "nom": "vomissement", "poids": 0.7 }
+    ],
+    "conditions": { "age": "<5" },
+    "gravite": "critique"
+  },
+  {
+    "maladie": "grippe",
+    "symptomes": [
+      { "nom": "fièvre", "poids": 0.7 },
+      { "nom": "toux", "poids": 0.6 },
+      { "nom": "courbatures", "poids": 0.5 }
+    ],
+    "gravite": "modérée"
+  },
+  {
+    "maladie": "covid-19",
+    "symptomes": [
+      { "nom": "fièvre", "poids": 0.6 },
+      { "nom": "toux sèche", "poids": 0.7 },
+      { "nom": "perte d'odorat", "poids": 0.9 }
+    ],
+    "gravite": "variable"
+  },
+  {
+    "maladie": "pneumonie",
+    "symptomes": [
+      { "nom": "toux", "poids": 0.8 },
+      { "nom": "difficulté respiratoire", "poids": 0.9 },
+      { "nom": "fièvre", "poids": 0.7 }
+    ],
+    "gravite": "élevée"
+  },
+  {
+    "maladie": "asthme",
+    "symptomes": [
+      { "nom": "respiration sifflante", "poids": 0.9 },
+      { "nom": "essoufflement", "poids": 0.8 }
+    ],
+    "gravite": "variable"
+  },
+  {
+    "maladie": "diarrhée aiguë",
+    "symptomes": [
+      { "nom": "diarrhée", "poids": 0.9 },
+      { "nom": "déshydratation", "poids": 0.8 }
+    ],
+    "gravite": "modérée"
+  },
+  {
+    "maladie": "choléra",
+    "symptomes": [
+      { "nom": "diarrhée sévère", "poids": 1.0 },
+      { "nom": "déshydratation", "poids": 1.0 }
+    ],
+    "gravite": "critique"
+  },
+  {
+    "maladie": "appendicite",
+    "symptomes": [
+      { "nom": "douleur abdominale", "poids": 0.9 },
+      { "nom": "nausée", "poids": 0.6 }
+    ],
+    "gravite": "élevée"
+  },
+  {
+    "maladie": "AVC",
+    "symptomes": [
+      { "nom": "paralysie", "poids": 1.0 },
+      { "nom": "trouble de la parole", "poids": 0.9 }
+    ],
+    "gravite": "critique"
+  },
+  {
+    "maladie": "infarctus",
+    "symptomes": [
+      { "nom": "douleur thoracique", "poids": 1.0 },
+      { "nom": "transpiration", "poids": 0.8 }
+    ],
+    "gravite": "critique"
+  },
+  {
+    "maladie": "tuberculose",
+    "symptomes": [
+      { "nom": "toux chronique", "poids": 0.9 },
+      { "nom": "perte de poids", "poids": 0.7 }
+    ],
+    "gravite": "élevée"
+  },
+  {
+    "maladie": "anémie",
+    "symptomes": [
+      { "nom": "fatigue", "poids": 0.8 },
+      { "nom": "pâleur", "poids": 0.7 }
+    ],
+    "gravite": "modérée"
+  },
+  {
+    "maladie": "hypertension",
+    "symptomes": [
+      { "nom": "maux de tête", "poids": 0.6 },
+      { "nom": "vertiges", "poids": 0.5 }
+    ],
+    "gravite": "variable"
+  },
+  {
+    "maladie": "méningite",
+    "symptomes": [
+      { "nom": "fièvre", "poids": 0.9 },
+      { "nom": "raideur de la nuque", "poids": 1.0 }
+    ],
+    "gravite": "critique"
+  },
+  {
+    "maladie": "otite",
+    "symptomes": [{ "nom": "douleur oreille", "poids": 0.8 }],
+    "gravite": "faible"
+  },
+  {
+    "maladie": "ulcère gastrique",
+    "symptomes": [
+      { "nom": "douleur abdominale", "poids": 0.7 },
+      { "nom": "brûlure", "poids": 0.6 }
+    ],
+    "gravite": "modérée"
+  },
+  {
+    "maladie": "insuffisance respiratoire",
+    "symptomes": [
+      { "nom": "essoufflement", "poids": 1.0 },
+      { "nom": "cyanose", "poids": 1.0 }
+    ],
+    "gravite": "critique"
+  },
+  {
+    "maladie": "déshydratation sévère",
+    "symptomes": [
+      { "nom": "soif intense", "poids": 0.9 },
+      { "nom": "fatigue", "poids": 0.7 }
+    ],
+    "gravite": "élevée"
+  },
+  {
+    "maladie": "allergie",
+    "symptomes": [
+      { "nom": "éruption cutanée", "poids": 0.8 },
+      { "nom": "démangeaisons", "poids": 0.7 }
+    ],
+    "gravite": "faible"
+  }
+]
