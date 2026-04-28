@@ -137,9 +137,9 @@ export const entityConfigs: { [K in EntityKey]: EntityConfig<K> } = {
         type: "select",
         required: true,
         options: [
-          { value: "Hospitalise", label: "Hospitalise" },
-          { value: "En observation", label: "En observation" },
-          { value: "Sorti", label: "Sorti" },
+          { value: "en_attente", label: "En attente" },
+          { value: "hospitalise", label: "Hospitalise" },
+          { value: "sorti", label: "Sorti" },
         ],
       },
     ],

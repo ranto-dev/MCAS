@@ -23,18 +23,7 @@ export const initialData: DatabaseState = {
       etablissement_id: 2,
     },
   ],
-  patients: [
-    {
-      id: 1,
-      nom: "Rasoanaivo",
-      prenom: "Miora",
-      maladies: "Paludisme severe",
-      etablissement_id: 2,
-      date_admission: "2026-04-01",
-      date_sortie: "",
-      status: "Hospitalise",
-    },
-  ],
+  patients: [],
   capacite: [
     {
       id: 1,

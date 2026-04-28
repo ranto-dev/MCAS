@@ -1,6 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialData } from "../data/mockData";
-import type { Admin, DatabaseState, EntityKey, Etablissement, Personnel } from "../types/entities";
+import type {
+  Admin,
+  DatabaseState,
+  EntityKey,
+  Etablissement,
+  Patient,
+  Personnel,
+} from "../types/entities";
 
 type InsertPayload<K extends EntityKey> = Omit<DatabaseState[K][number], "id">;
 type UpdatePayload<K extends EntityKey> = DatabaseState[K][number];
@@ -45,11 +52,23 @@ interface ApiPersonnel {
   etablissement_id: number;
 }
 
+interface ApiPatient {
+  ID: number;
+  nom: string;
+  prenom: string;
+  maladies: string;
+  etablissement_id: number;
+  date_admission: string | null;
+  date_sortie: string | null;
+  status: string;
+}
+
 const ETABLISSEMENTS_API_URL =
   import.meta.env.VITE_ETABLISSEMENTS_API_URL ?? "http://192.168.0.104:8080/etablissements";
 const ADMINS_API_URL = import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
 const PERSONNEL_API_URL =
   import.meta.env.VITE_PERSONNEL_API_URL ?? "http://192.168.0.104:8080/personnel";
+const PATIENTS_API_URL = import.meta.env.VITE_PATIENTS_API_URL ?? "http://192.168.0.104:8080/patients";
 
 const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   id: item.ID,
@@ -77,6 +96,22 @@ const mapApiPersonnel = (item: ApiPersonnel): Personnel => ({
   poste: item.poste,
   age: item.age,
   etablissement_id: item.etablissement_id,
+});
+
+const toDateInputFormat = (value: string | null): string => {
+  if (!value) return "";
+  return value.slice(0, 10);
+};
+
+const mapApiPatient = (item: ApiPatient): Patient => ({
+  id: item.ID,
+  nom: item.nom,
+  prenom: item.prenom,
+  maladies: item.maladies,
+  etablissement_id: item.etablissement_id,
+  date_admission: toDateInputFormat(item.date_admission),
+  date_sortie: toDateInputFormat(item.date_sortie),
+  status: item.status,
 });
 
 export function AdminDataProvider({ children }: { children: React.ReactNode }) {
@@ -148,9 +183,31 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
+    const loadPatients = async () => {
+      try {
+        const response = await fetch(PATIENTS_API_URL);
+        if (!response.ok) {
+          throw new Error(`Echec API patients: ${response.status}`);
+        }
+
+        const payload = (await response.json()) as ApiPatient[];
+        const patients: Patient[] = payload.map(mapApiPatient);
+
+        if (isMounted) {
+          setData((prev) => ({
+            ...prev,
+            patients,
+          }));
+        }
+      } catch (error) {
+        console.error("Impossible de charger les patients depuis l'API.", error);
+      }
+    };
+
     void loadEtablissements();
     void loadAdmins();
     void loadPersonnels();
+    void loadPatients();
 
     return () => {
       isMounted = false;
@@ -238,6 +295,44 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         return;
       } catch (error) {
         console.error("Impossible de creer le personnel via l'API.", error);
+        return;
+      }
+    }
+
+    if (entity === "patients") {
+      const { nom, prenom, maladies, etablissement_id, status } = payload as unknown as Omit<
+        Patient,
+        "id"
+      >;
+      try {
+        const response = await fetch(PATIENTS_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nom,
+            prenom,
+            maladies,
+            etablissement_id,
+            status,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec creation patient: ${response.status}`);
+        }
+
+        const created = (await response.json()) as ApiPatient;
+        const createdPatient = mapApiPatient(created);
+
+        setData((prev) => ({
+          ...prev,
+          patients: [...prev.patients, createdPatient],
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de creer le patient via l'API.", error);
         return;
       }
     }
@@ -350,6 +445,46 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    if (entity === "patients") {
+      const { id, nom, prenom, maladies, etablissement_id, status } = payload as Patient;
+      try {
+        const response = await fetch(`${PATIENTS_API_URL}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nom,
+            prenom,
+            maladies,
+            etablissement_id,
+            status,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec modification patient: ${response.status}`);
+        }
+
+        let updatedPatient: Patient = payload as Patient;
+        try {
+          const updatedFromApi = (await response.json()) as ApiPatient;
+          updatedPatient = mapApiPatient(updatedFromApi);
+        } catch {
+          // Certaines APIs PUT ne renvoient pas de JSON; on garde les donnees envoyees.
+        }
+
+        setData((prev) => ({
+          ...prev,
+          patients: prev.patients.map((row) => (row.id === id ? updatedPatient : row)),
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de modifier le patient via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => ({
       ...prev,
       [entity]: prev[entity].map((row) => (row.id === payload.id ? payload : row)),
@@ -381,6 +516,20 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         console.error("Impossible de supprimer le personnel via l'API.", error);
+        return;
+      }
+    }
+
+    if (entity === "patients") {
+      try {
+        const response = await fetch(`${PATIENTS_API_URL}/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`Echec suppression patient: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Impossible de supprimer le patient via l'API.", error);
         return;
       }
     }
