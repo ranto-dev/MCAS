@@ -79,14 +79,14 @@ export function EntityPage<K extends EntityKey>({ entity }: EntityPageProps<K>) 
     }
     if (mode === "edit" && activeRow) {
       const merged = { ...activeRow, ...payload } as unknown as DatabaseState[K][number];
-      updateItem(entity, merged);
+      await updateItem(entity, merged);
     }
     closeModal();
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!activeRow) return;
-    deleteItem(entity, activeRow.id);
+    await deleteItem(entity, activeRow.id);
     closeModal();
   };
 

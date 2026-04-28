@@ -8,8 +8,8 @@ type UpdatePayload<K extends EntityKey> = DatabaseState[K][number];
 interface AdminDataContextValue {
   data: DatabaseState;
   createItem: <K extends EntityKey>(entity: K, payload: InsertPayload<K>) => Promise<void>;
-  updateItem: <K extends EntityKey>(entity: K, payload: UpdatePayload<K>) => void;
-  deleteItem: (entity: EntityKey, id: number) => void;
+  updateItem: <K extends EntityKey>(entity: K, payload: UpdatePayload<K>) => Promise<void>;
+  deleteItem: (entity: EntityKey, id: number) => Promise<void>;
 }
 
 const AdminDataContext = createContext<AdminDataContextValue | undefined>(undefined);
@@ -108,14 +108,76 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const updateItem: AdminDataContextValue["updateItem"] = (entity, payload) => {
+  const updateItem: AdminDataContextValue["updateItem"] = async (entity, payload) => {
+    if (entity === "etablissement") {
+      const { id, nom, region, contact, categorie } = payload as Etablissement;
+      try {
+        const response = await fetch(`${ETABLISSEMENTS_API_URL}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nom,
+            region,
+            contact,
+            categorie,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec modification etablissement: ${response.status}`);
+        }
+
+        let updatedEtablissement: Etablissement = {
+          id,
+          nom,
+          region,
+          contact,
+          categorie,
+        };
+
+        try {
+          const updatedFromApi = (await response.json()) as ApiEtablissement;
+          updatedEtablissement = mapApiEtablissement(updatedFromApi);
+        } catch {
+          // Certaines APIs PUT ne renvoient pas de JSON; on garde les donnees envoyees.
+        }
+
+        setData((prev) => ({
+          ...prev,
+          etablissement: prev.etablissement.map((row) =>
+            row.id === id ? updatedEtablissement : row,
+          ),
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de modifier l'etablissement via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => ({
       ...prev,
       [entity]: prev[entity].map((row) => (row.id === payload.id ? payload : row)),
     }));
   };
 
-  const deleteItem = (entity: EntityKey, id: number) => {
+  const deleteItem: AdminDataContextValue["deleteItem"] = async (entity, id) => {
+    if (entity === "etablissement") {
+      try {
+        const response = await fetch(`${ETABLISSEMENTS_API_URL}/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`Echec suppression etablissement: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Impossible de supprimer l'etablissement via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => {
       const next: DatabaseState = {
         ...prev,
