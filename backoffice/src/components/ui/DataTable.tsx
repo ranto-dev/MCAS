@@ -1,4 +1,5 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 interface Column<T> {
   key: string;
@@ -45,8 +46,14 @@ export function DataTable<T extends { id: number }>({
               </td>
             </tr>
           )}
-          {rows.map((row) => (
-            <tr key={row.id} className="transition hover:bg-blue-50/40">
+          {rows.map((row, index) => (
+            <motion.tr
+              key={row.id}
+              className="transition hover:bg-blue-50/40"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: index * 0.02 }}
+            >
               {columns.map((column) => (
                 <td key={column.key} className="px-4 py-3 text-sm text-black">
                   {column.render(row)}
@@ -57,7 +64,7 @@ export function DataTable<T extends { id: number }>({
                   <button
                     type="button"
                     onClick={() => onEdit(row)}
-                    className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-blue-700"
+                    className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-blue-700 active:scale-[0.98]"
                   >
                     <FaEdit size={12} />
                     Modifier
@@ -65,14 +72,14 @@ export function DataTable<T extends { id: number }>({
                   <button
                     type="button"
                     onClick={() => onDelete(row)}
-                    className="inline-flex items-center gap-2 rounded-lg border border-black px-3 py-2 text-xs font-medium text-black transition hover:bg-black hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-lg border border-black px-3 py-2 text-xs font-medium text-black transition hover:bg-black hover:text-white active:scale-[0.98]"
                   >
                     <FaTrash size={12} />
                     Supprimer
                   </button>
                 </div>
               </td>
-            </tr>
+            </motion.tr>
           ))}
         </tbody>
       </table>

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Plus } from "lucide-react";
+import { motion } from "framer-motion";
 import { DataTable } from "../components/ui/DataTable";
 import { EntityForm } from "../components/ui/EntityForm";
 import { Modal } from "../components/ui/Modal";
@@ -90,8 +91,18 @@ export function EntityPage<K extends EntityKey>({ entity }: EntityPageProps<K>) 
   };
 
   return (
-    <section className="space-y-6">
-      <header className="flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm md:flex-row md:items-start md:justify-between">
+    <motion.section
+      className="space-y-6"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+    >
+      <motion.header
+        className="flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm md:flex-row md:items-start md:justify-between"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.22, delay: 0.05 }}
+      >
         <div className="space-y-2">
           <div className="inline-flex rounded-xl bg-blue-100 p-2 text-blue-700">
             <config.icon size={18} />
@@ -99,17 +110,25 @@ export function EntityPage<K extends EntityKey>({ entity }: EntityPageProps<K>) 
           <h2 className="text-2xl font-bold text-black">{config.title}</h2>
           <p className="text-sm text-black/70">{config.description}</p>
         </div>
-        <button
+        <motion.button
           type="button"
           onClick={openCreate}
           className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           <Plus size={16} />
           Ajouter
-        </button>
-      </header>
+        </motion.button>
+      </motion.header>
 
-      <DataTable rows={rows} columns={columns} onEdit={openEdit} onDelete={openDelete} />
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.22, delay: 0.08 }}
+      >
+        <DataTable rows={rows} columns={columns} onEdit={openEdit} onDelete={openDelete} />
+      </motion.div>
 
       <Modal
         title={mode === "edit" ? "Modifier l'element" : "Ajouter un nouvel element"}
@@ -148,6 +167,6 @@ export function EntityPage<K extends EntityKey>({ entity }: EntityPageProps<K>) 
           </div>
         </div>
       </Modal>
-    </section>
+    </motion.section>
   );
 }
