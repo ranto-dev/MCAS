@@ -40,7 +40,7 @@ export interface Patient {
 export interface Capacite {
   id: number;
   maladies: string;
-  espaces: string;
+  espaces: number;
   etablissement_id: number;
 }
 

@@ -24,20 +24,7 @@ export const initialData: DatabaseState = {
     },
   ],
   patients: [],
-  capacite: [
-    {
-      id: 1,
-      maladies: "Cardiologie",
-      espaces: "32 lits",
-      etablissement_id: 1,
-    },
-    {
-      id: 2,
-      maladies: "Pediatrie",
-      espaces: "18 lits",
-      etablissement_id: 2,
-    },
-  ],
+  capacite: [],
   ambulance: [
     {
       id: 1,

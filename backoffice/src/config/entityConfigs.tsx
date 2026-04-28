@@ -158,7 +158,7 @@ export const entityConfigs: { [K in EntityKey]: EntityConfig<K> } = {
     icon: Bed,
     fields: (data) => [
       { name: "maladies", label: "Maladies", type: "text", required: true },
-      { name: "espaces", label: "Espaces", type: "text", required: true },
+      { name: "espaces", label: "Espaces", type: "number", required: true },
       {
         name: "etablissement_id",
         label: "Etablissement",

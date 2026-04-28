@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialData } from "../data/mockData";
 import type {
   Admin,
+  Capacite,
   DatabaseState,
   EntityKey,
   Etablissement,
@@ -63,12 +64,21 @@ interface ApiPatient {
   status: string;
 }
 
+interface ApiCapacite {
+  ID: number;
+  maladies: string;
+  espaces: number;
+  etablissement_id: number;
+}
+
 const ETABLISSEMENTS_API_URL =
   import.meta.env.VITE_ETABLISSEMENTS_API_URL ?? "http://192.168.0.104:8080/etablissements";
 const ADMINS_API_URL = import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
 const PERSONNEL_API_URL =
   import.meta.env.VITE_PERSONNEL_API_URL ?? "http://192.168.0.104:8080/personnel";
 const PATIENTS_API_URL = import.meta.env.VITE_PATIENTS_API_URL ?? "http://192.168.0.104:8080/patients";
+const CAPACITES_API_URL =
+  import.meta.env.VITE_CAPACITES_API_URL ?? "http://192.168.0.104:8080/capacites";
 
 const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   id: item.ID,
@@ -112,6 +122,13 @@ const mapApiPatient = (item: ApiPatient): Patient => ({
   date_admission: toDateInputFormat(item.date_admission),
   date_sortie: toDateInputFormat(item.date_sortie),
   status: item.status,
+});
+
+const mapApiCapacite = (item: ApiCapacite): Capacite => ({
+  id: item.ID,
+  maladies: item.maladies,
+  espaces: item.espaces,
+  etablissement_id: item.etablissement_id,
 });
 
 export function AdminDataProvider({ children }: { children: React.ReactNode }) {
@@ -204,10 +221,32 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
+    const loadCapacites = async () => {
+      try {
+        const response = await fetch(CAPACITES_API_URL);
+        if (!response.ok) {
+          throw new Error(`Echec API capacites: ${response.status}`);
+        }
+
+        const payload = (await response.json()) as ApiCapacite[];
+        const capacites: Capacite[] = payload.map(mapApiCapacite);
+
+        if (isMounted) {
+          setData((prev) => ({
+            ...prev,
+            capacite: capacites,
+          }));
+        }
+      } catch (error) {
+        console.error("Impossible de charger les capacites depuis l'API.", error);
+      }
+    };
+
     void loadEtablissements();
     void loadAdmins();
     void loadPersonnels();
     void loadPatients();
+    void loadCapacites();
 
     return () => {
       isMounted = false;
@@ -333,6 +372,39 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         return;
       } catch (error) {
         console.error("Impossible de creer le patient via l'API.", error);
+        return;
+      }
+    }
+
+    if (entity === "capacite") {
+      const { maladies, espaces, etablissement_id } = payload as unknown as Omit<Capacite, "id">;
+      try {
+        const response = await fetch(CAPACITES_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            maladies,
+            espaces,
+            etablissement_id,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec creation capacite: ${response.status}`);
+        }
+
+        const created = (await response.json()) as ApiCapacite;
+        const createdCapacite = mapApiCapacite(created);
+
+        setData((prev) => ({
+          ...prev,
+          capacite: [...prev.capacite, createdCapacite],
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de creer la capacite via l'API.", error);
         return;
       }
     }
