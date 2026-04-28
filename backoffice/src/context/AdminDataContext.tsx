@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialData } from "../data/mockData";
-import type { Admin, DatabaseState, EntityKey, Etablissement } from "../types/entities";
+import type { Admin, DatabaseState, EntityKey, Etablissement, Personnel } from "../types/entities";
 
 type InsertPayload<K extends EntityKey> = Omit<DatabaseState[K][number], "id">;
 type UpdatePayload<K extends EntityKey> = DatabaseState[K][number];
@@ -35,9 +35,21 @@ interface ApiAdmin {
   etablissement_id: number;
 }
 
+interface ApiPersonnel {
+  ID: number;
+  nom: string;
+  prenom: string;
+  contact: string;
+  poste: string;
+  age: number;
+  etablissement_id: number;
+}
+
 const ETABLISSEMENTS_API_URL =
   import.meta.env.VITE_ETABLISSEMENTS_API_URL ?? "http://192.168.0.104:8080/etablissements";
 const ADMINS_API_URL = import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
+const PERSONNEL_API_URL =
+  import.meta.env.VITE_PERSONNEL_API_URL ?? "http://192.168.0.104:8080/personnel";
 
 const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   id: item.ID,
@@ -54,6 +66,16 @@ const mapApiAdmin = (item: ApiAdmin): Admin => ({
   username: item.username,
   mdp: item.mdp,
   email: item.email,
+  etablissement_id: item.etablissement_id,
+});
+
+const mapApiPersonnel = (item: ApiPersonnel): Personnel => ({
+  id: item.ID,
+  nom: item.nom,
+  prenom: item.prenom,
+  contact: item.contact,
+  poste: item.poste,
+  age: item.age,
   etablissement_id: item.etablissement_id,
 });
 
@@ -105,8 +127,30 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
+    const loadPersonnels = async () => {
+      try {
+        const response = await fetch(PERSONNEL_API_URL);
+        if (!response.ok) {
+          throw new Error(`Echec API personnel: ${response.status}`);
+        }
+
+        const payload = (await response.json()) as ApiPersonnel[];
+        const personnels: Personnel[] = payload.map(mapApiPersonnel);
+
+        if (isMounted) {
+          setData((prev) => ({
+            ...prev,
+            personnel: personnels,
+          }));
+        }
+      } catch (error) {
+        console.error("Impossible de charger les personnels depuis l'API.", error);
+      }
+    };
+
     void loadEtablissements();
     void loadAdmins();
+    void loadPersonnels();
 
     return () => {
       isMounted = false;
