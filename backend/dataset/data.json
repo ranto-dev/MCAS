@@ -1,166 +1,1143 @@
 [
   {
-    "maladie": "paludisme",
+    "maladie": "Peste bubonique",
+    "gravite": "critique",
     "symptomes": [
-      { "nom": "fièvre", "poids": 0.9 },
-      { "nom": "frissons", "poids": 0.8 },
-      { "nom": "fatigue", "poids": 0.6 }
-    ],
-    "conditions": { "zone_endemique": true },
-    "gravite": "élevée"
+      { "nom": "bubon inguinal ou axillaire douloureux", "poids": 1.0 },
+      { "nom": "fièvre brutale > 39°C", "poids": 0.9 },
+      { "nom": "frissons intenses", "poids": 0.8 },
+      { "nom": "céphalées sévères", "poids": 0.7 },
+      { "nom": "prostration", "poids": 0.8 },
+      { "nom": "douleurs musculaires", "poids": 0.6 },
+      { "nom": "nausées", "poids": 0.5 },
+      { "nom": "vomissements", "poids": 0.5 },
+      { "nom": "sensibilité à la palpation des ganglions", "poids": 0.9 },
+      { "nom": "rougeur cutanée sur le bubon", "poids": 0.8 },
+      { "nom": "tachycardie", "poids": 0.7 },
+      { "nom": "agitation ou délire", "poids": 0.6 },
+      { "nom": "hypotension", "poids": 0.7 },
+      { "nom": "pétéchies", "poids": 0.5 },
+      { "nom": "douleur abdominale", "poids": 0.4 },
+      { "nom": "soif intense", "poids": 0.4 },
+      { "nom": "langue saburrale", "poids": 0.3 },
+      { "nom": "insomnie due à la douleur", "poids": 0.3 },
+      { "nom": "altération de l'état général", "poids": 0.9 },
+      { "nom": "contact avec des rongeurs/puces", "poids": 0.8 }
+    ]
   },
   {
-    "maladie": "paludisme grave",
+    "maladie": "Paludisme (Malaria)",
+    "gravite": "élevée",
     "symptomes": [
-      { "nom": "fièvre", "poids": 0.9 },
-      { "nom": "convulsion", "poids": 1.0 },
-      { "nom": "vomissement", "poids": 0.7 }
-    ],
-    "conditions": { "age": "<5" },
-    "gravite": "critique"
+      { "nom": "fièvre tierce ou quarte", "poids": 1.0 },
+      { "nom": "frissons solennels", "poids": 0.9 },
+      { "nom": "sueurs abondantes", "poids": 0.9 },
+      { "nom": "céphalées", "poids": 0.7 },
+      { "nom": "fatigue", "poids": 0.6 },
+      { "nom": "anémie", "poids": 0.7 },
+      { "nom": "splénomégalie", "poids": 0.8 },
+      { "nom": "myalgies", "poids": 0.5 },
+      { "nom": "arthralgies", "poids": 0.5 },
+      { "nom": "nausées", "poids": 0.4 },
+      { "nom": "vomissements", "poids": 0.4 },
+      { "nom": "ictère léger", "poids": 0.5 },
+      { "nom": "urines foncées", "poids": 0.6 },
+      { "nom": "toux sèche", "poids": 0.3 },
+      { "nom": "diarrhée", "poids": 0.4 },
+      { "nom": "douleurs abdominales", "poids": 0.5 },
+      { "nom": "pâleur cutanéo-muqueuse", "poids": 0.7 },
+      { "nom": "tachycardie", "poids": 0.5 },
+      { "nom": "malaise général", "poids": 0.6 },
+      { "nom": "antécédent de piqûre de moustique", "poids": 0.8 }
+    ]
   },
   {
-    "maladie": "grippe",
+    "maladie": "Bilharziose (Schistosomiase)",
+    "gravite": "élevée",
     "symptomes": [
+      { "nom": "hématurie terminale", "poids": 1.0 },
+      { "nom": "douleur à la miction", "poids": 0.8 },
+      { "nom": "pollakiurie", "poids": 0.7 },
+      { "nom": "douleurs sus-pubiennes", "poids": 0.7 },
+      { "nom": "fatigue chronique", "poids": 0.6 },
+      { "nom": "anémie", "poids": 0.6 },
+      { "nom": "démangeaisons après baignade", "poids": 0.9 },
+      { "nom": "urticaire", "poids": 0.4 },
+      { "nom": "toux sèche", "poids": 0.3 },
+      { "nom": "fièvre modérée", "poids": 0.3 },
+      { "nom": "perte de poids", "poids": 0.4 },
+      { "nom": "douleurs lombaires", "poids": 0.5 },
+      { "nom": "retard de croissance", "poids": 0.7 },
+      { "nom": "protéinurie", "poids": 0.6 },
+      { "nom": "insuffisance rénale", "poids": 0.8 },
+      { "nom": "fibrose de la vessie", "poids": 0.9 },
+      { "nom": "éosinophilie", "poids": 0.7 },
+      { "nom": "lésions génitales", "poids": 0.5 },
+      { "nom": "douleurs pendant les rapports", "poids": 0.5 },
+      { "nom": "sang dans les selles (si intestinale)", "poids": 0.6 }
+    ]
+  },
+  {
+    "maladie": "Neurocysticercose",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "crises d'épilepsie", "poids": 1.0 },
+      { "nom": "maux de tête chroniques", "poids": 0.8 },
+      { "nom": "hypertension intracrânienne", "poids": 0.9 },
+      { "nom": "troubles de la vision", "poids": 0.7 },
+      { "nom": "confusion mentale", "poids": 0.6 },
+      { "nom": "troubles de la marche", "poids": 0.7 },
+      { "nom": "nodules sous-cutanés", "poids": 0.8 },
+      { "nom": "nausées chroniques", "poids": 0.5 },
+      { "nom": "vomissements en jet", "poids": 0.7 },
+      { "nom": "faiblesse musculaire localisée", "poids": 0.6 },
+      { "nom": "troubles du langage", "poids": 0.5 },
+      { "nom": "altération de la mémoire", "poids": 0.4 },
+      { "nom": "vertiges", "poids": 0.4 },
+      { "nom": "somnolence excessive", "poids": 0.5 },
+      { "nom": "irritabilité", "poids": 0.3 },
+      { "nom": "hallucinations", "poids": 0.2 },
+      { "nom": "méningite aseptique", "poids": 0.5 },
+      { "nom": "hydrocéphalie", "poids": 0.8 },
+      { "nom": "douleur radiculaire", "poids": 0.4 },
+      { "nom": "consommation de viande de porc douteuse", "poids": 0.7 }
+    ]
+  },
+  {
+    "maladie": "Fièvre Typhoïde",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "fièvre en plateau 39-40°C", "poids": 1.0 },
+      { "nom": "pouls dissocié", "poids": 0.9 },
+      { "nom": "tuphos", "poids": 0.9 },
+      { "nom": "douleurs abdominales", "poids": 0.8 },
+      { "nom": "diarrhée jus de melon", "poids": 0.8 },
+      { "nom": "taches rosées lenticulaires", "poids": 0.7 },
+      { "nom": "langue rôtie", "poids": 0.7 },
+      { "nom": "céphalées frontales", "poids": 0.8 },
+      { "nom": "anorexie", "poids": 0.7 },
+      { "nom": "splénomégalie", "poids": 0.7 },
+      { "nom": "gargouillement fosse iliaque droite", "poids": 0.8 },
+      { "nom": "épistaxis", "poids": 0.4 },
+      { "nom": "toux sèche", "poids": 0.3 },
+      { "nom": "malaise général", "poids": 0.6 },
+      { "nom": "insomnie", "poids": 0.5 },
+      { "nom": "constipation initiale", "poids": 0.6 },
+      { "nom": "vertiges", "poids": 0.3 },
+      { "nom": "perforation intestinale", "poids": 0.6 },
+      { "nom": "endormissement diurne", "poids": 0.4 },
+      { "nom": "frissons", "poids": 0.4 }
+    ]
+  },
+  {
+    "maladie": "Chikungunya",
+    "gravite": "modérée",
+    "symptomes": [
+      { "nom": "arthralgies invalidantes", "poids": 1.0 },
+      { "nom": "fièvre brutale", "poids": 0.9 },
+      { "nom": "éruption cutanée", "poids": 0.7 },
+      { "nom": "œdème articulaire", "poids": 0.8 },
+      { "nom": "céphalées", "poids": 0.6 },
+      { "nom": "myalgies", "poids": 0.7 },
+      { "nom": "fatigue intense", "poids": 0.8 },
+      { "nom": "nausées", "poids": 0.4 },
+      { "nom": "conjonctivite", "poids": 0.5 },
+      { "nom": "douleurs dorsales", "poids": 0.6 },
+      { "nom": "adénopathies", "poids": 0.5 },
+      { "nom": "démangeaisons", "poids": 0.4 },
+      { "nom": "goût métallique", "poids": 0.3 },
+      { "nom": "insomnie due à la douleur", "poids": 0.5 },
+      { "nom": "raideur matinale", "poids": 0.7 },
+      { "nom": "photophobie", "poids": 0.4 },
+      { "nom": "douleurs aux poignets", "poids": 0.8 },
+      { "nom": "douleurs aux chevilles", "poids": 0.8 },
+      { "nom": "difficulté à rester debout", "poids": 0.9 },
+      { "nom": "évolution vers chronicité", "poids": 0.6 }
+    ]
+  },
+  {
+    "maladie": "Infarctus du myocarde",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "douleur thoracique rétrosternale", "poids": 1.0 },
+      { "nom": "douleur irradiant vers bras gauche", "poids": 0.9 },
+      { "nom": "douleur irradiant vers la mâchoire", "poids": 0.8 },
+      { "nom": "sensation d'oppression", "poids": 0.9 },
+      { "nom": "transpiration profuse", "poids": 0.8 },
+      { "nom": "dyspnée", "poids": 0.7 },
+      { "nom": "nausées", "poids": 0.5 },
+      { "nom": "angoisse de mort imminente", "poids": 0.9 },
+      { "nom": "pâleur", "poids": 0.6 },
+      { "nom": "malaise", "poids": 0.7 },
+      { "nom": "pouls irrégulier", "poids": 0.6 },
+      { "nom": "hypotension", "poids": 0.7 },
+      { "nom": "douleur épigastrique", "poids": 0.5 },
+      { "nom": "évanouissement", "poids": 0.8 },
+      { "nom": "fatigue inhabituelle", "poids": 0.4 },
+      { "nom": "toux sèche", "poids": 0.2 },
+      { "nom": "cyanose", "poids": 0.5 },
+      { "nom": "vertiges", "poids": 0.4 },
+      { "nom": "arythmie", "poids": 0.8 },
+      { "nom": "douleur résistante à la trinitrine", "poids": 0.9 }
+    ]
+  },
+  {
+    "maladie": "AVC (Accident Vasculaire Cérébral)",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "hémiplégie brutale", "poids": 1.0 },
+      { "nom": "aphasie", "poids": 0.9 },
+      { "nom": "paralysie faciale", "poids": 1.0 },
+      { "nom": "perte d'équilibre", "poids": 0.8 },
+      { "nom": "céphalée brutale 'coup de tonnerre'", "poids": 0.9 },
+      { "nom": "troubles de la vision", "poids": 0.7 },
+      { "nom": "confusion", "poids": 0.8 },
+      { "nom": "engourdissement unilatéral", "poids": 0.9 },
+      { "nom": "difficulté à avaler", "poids": 0.6 },
+      { "nom": "vertiges", "poids": 0.5 },
+      { "nom": "troubles de la conscience", "poids": 0.8 },
+      { "nom": "perte de coordination", "poids": 0.7 },
+      { "nom": "vomissements", "poids": 0.4 },
+      { "nom": "convulsions", "poids": 0.5 },
+      { "nom": "somnolence", "poids": 0.6 },
+      { "nom": "incontinence", "poids": 0.4 },
+      { "nom": "troubles de la mémoire immédiate", "poids": 0.5 },
+      { "nom": "agitation", "poids": 0.4 },
+      { "nom": "vision double", "poids": 0.7 },
+      { "nom": "dysarthrie", "poids": 0.9 }
+    ]
+  },
+  {
+    "maladie": "Rougeole (Kitrotro)",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "taches de Koplik", "poids": 1.0 },
+      { "nom": "éruption morbilliforme", "poids": 1.0 },
+      { "nom": "fièvre > 39°C", "poids": 0.9 },
+      { "nom": "catarrhe oculo-nasal", "poids": 0.8 },
+      { "nom": "toux opiniâtre", "poids": 0.8 },
+      { "nom": "conjonctivite", "poids": 0.8 },
+      { "nom": "photophobie", "poids": 0.7 },
+      { "nom": "rhinite", "poids": 0.7 },
+      { "nom": "diarrhée", "poids": 0.6 },
+      { "nom": "anorexie", "poids": 0.6 },
+      { "nom": "adénopathies", "poids": 0.5 },
+      { "nom": "visage bouffi", "poids": 0.7 },
+      { "nom": "malaise", "poids": 0.6 },
+      { "nom": "desquamation", "poids": 0.5 },
+      { "nom": "otite", "poids": 0.4 },
+      { "nom": "irritabilité", "poids": 0.5 },
+      { "nom": "vomissements", "poids": 0.3 },
+      { "nom": "douleurs pharyngées", "poids": 0.4 },
+      { "nom": "épuisement", "poids": 0.7 },
+      { "nom": "taches rouges derrière oreilles", "poids": 0.9 }
+    ]
+  },
+  {
+    "maladie": "Rage",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "hydrophobie", "poids": 1.0 },
+      { "nom": "aérophobie", "poids": 1.0 },
+      { "nom": "paresthésie au site de morsure", "poids": 0.9 },
+      { "nom": "agitation psychomotrice", "poids": 0.9 },
+      { "nom": "hallucinations", "poids": 0.8 },
+      { "nom": "spasmes laryngés", "poids": 0.9 },
+      { "nom": "hypersalivation", "poids": 0.9 },
+      { "nom": "confusion", "poids": 0.8 },
+      { "nom": "insomnie", "poids": 0.6 },
       { "nom": "fièvre", "poids": 0.7 },
-      { "nom": "toux", "poids": 0.6 },
-      { "nom": "courbatures", "poids": 0.5 }
-    ],
-    "gravite": "modérée"
+      { "nom": "céphalées", "poids": 0.6 },
+      { "nom": "malaise", "poids": 0.5 },
+      { "nom": "anxiété", "poids": 0.7 },
+      { "nom": "paralysie ascendante", "poids": 0.8 },
+      { "nom": "convulsions", "poids": 0.7 },
+      { "nom": "mydriase", "poids": 0.6 },
+      { "nom": "difficulté de déglutition", "poids": 0.9 },
+      { "nom": "agressivité", "poids": 0.8 },
+      { "nom": "coma", "poids": 0.9 },
+      { "nom": "morsure d'animal errant", "poids": 1.0 }
+    ]
   },
   {
-    "maladie": "covid-19",
+    "maladie": "Lèpre (Maladie de Hansen)",
+    "gravite": "élevée",
     "symptomes": [
-      { "nom": "fièvre", "poids": 0.6 },
-      { "nom": "toux sèche", "poids": 0.7 },
-      { "nom": "perte d'odorat", "poids": 0.9 }
-    ],
-    "gravite": "variable"
+      { "nom": "taches claires insensibles (hypochromiques)", "poids": 1.0 },
+      { "nom": "épaississement des troncs nerveux", "poids": 0.9 },
+      { "nom": "perte de sensibilité thermique", "poids": 0.9 },
+      { "nom": "perte de sensibilité à la douleur", "poids": 0.9 },
+      { "nom": "faiblesse musculaire des extrémités", "poids": 0.8 },
+      { "nom": "paralysie des mains ou des pieds", "poids": 0.7 },
+      { "nom": "résorption osseuse des phalanges", "poids": 0.7 },
+      { "nom": "perte des sourcils (madarose)", "poids": 0.8 },
+      { "nom": "nez bouché ou croûteux chronique", "poids": 0.4 },
+      { "nom": "épistaxis (saignements de nez)", "poids": 0.4 },
+      { "nom": "faciès léonin (traits du visage épais)", "poids": 0.9 },
+      { "nom": "nodules cutanés (lépromes)", "poids": 0.9 },
+      { "nom": "peau sèche et absence de sueur locale", "poids": 0.7 },
+      { "nom": "ulcères plantaires indolores (maux perforants)", "poids": 0.9 },
+      { "nom": "lagophtalmie (impossibilité de fermer l'œil)", "poids": 0.7 },
+      { "nom": "douleurs névralgiques", "poids": 0.6 },
+      { "nom": "atrophie des petits muscles de la main", "poids": 0.8 },
+      { "nom": "main en griffe", "poids": 0.9 },
+      { "nom": "pied tombant (atteinte nerveuse)", "poids": 0.7 },
+      { "nom": "kératite oculaire", "poids": 0.5 }
+    ]
   },
   {
-    "maladie": "pneumonie",
+    "maladie": "Fièvre Typhoïde",
+    "gravite": "élevée",
+    "conditions": { "hygiène_eau_précaire": true },
     "symptomes": [
-      { "nom": "toux", "poids": 0.8 },
-      { "nom": "difficulté respiratoire", "poids": 0.9 },
-      { "nom": "fièvre", "poids": 0.7 }
-    ],
-    "gravite": "élevée"
+      { "nom": "fièvre continue en plateau (39-40°C)", "poids": 1.0 },
+      { "nom": "pouls dissocié (lent par rapport à la fièvre)", "poids": 0.9 },
+      { "nom": "douleur abdominale diffuse", "poids": 0.8 },
+      { "nom": "tuphos (état de stupeur et prostration)", "poids": 0.9 },
+      { "nom": "diarrhée liquide ocre (jus de melon)", "poids": 0.8 },
+      { "nom": "céphalées frontales intenses", "poids": 0.8 },
+      {
+        "nom": "langue saburrale (blanche au centre, rouge aux bords)",
+        "poids": 0.7
+      },
+      { "nom": "taches rosées lenticulaires sur le tronc", "poids": 0.7 },
+      { "nom": "splénomégalie (grosse rate)", "poids": 0.7 },
+      { "nom": "gargouillement de la fosse iliaque droite", "poids": 0.8 },
+      { "nom": "insomnie", "poids": 0.5 },
+      { "nom": "anorexie sévère", "poids": 0.7 },
+      { "nom": "épistaxis (saignement de nez)", "poids": 0.4 },
+      { "nom": "toux sèche initiale", "poids": 0.3 },
+      { "nom": "malaise général", "poids": 0.6 },
+      { "nom": "constipation en début de maladie", "poids": 0.6 },
+      { "nom": "vertiges", "poids": 0.3 },
+      { "nom": "déshydratation", "poids": 0.5 },
+      { "nom": "frissons au début", "poids": 0.4 },
+      { "nom": "endormissement diurne", "poids": 0.4 }
+    ]
   },
   {
-    "maladie": "asthme",
+    "maladie": "Ascaridiose",
+    "gravite": "modérée",
     "symptomes": [
-      { "nom": "respiration sifflante", "poids": 0.9 },
-      { "nom": "essoufflement", "poids": 0.8 }
-    ],
-    "gravite": "variable"
+      { "nom": "présence de vers (Ascaris) dans les selles", "poids": 1.0 },
+      { "nom": "douleurs péri-ombilicales", "poids": 0.8 },
+      { "nom": "toux sèche irritative (Syndrome de Löffler)", "poids": 0.9 },
+      { "nom": "fièvre modérée lors de la migration des larves", "poids": 0.6 },
+      { "nom": "ballonnements abdominaux", "poids": 0.7 },
+      { "nom": "nausées", "poids": 0.5 },
+      { "nom": "vomissements (parfois de vers)", "poids": 0.6 },
+      { "nom": "diarrhées épisodiques", "poids": 0.5 },
+      { "nom": "perte d'appétit", "poids": 0.6 },
+      { "nom": "retard de croissance chez l'enfant", "poids": 0.7 },
+      { "nom": "urticaire ou démangeaisons", "poids": 0.4 },
+      { "nom": "agitation nocturne", "poids": 0.3 },
+      { "nom": "nez qui gratte (prurit nasal)", "poids": 0.4 },
+      { "nom": "cernes sous les yeux", "poids": 0.3 },
+      { "nom": "pâleur conjonctivale (anémie légère)", "poids": 0.5 },
+      { "nom": "troubles du sommeil", "poids": 0.4 },
+      { "nom": "fatigue", "poids": 0.5 },
+      { "nom": "irritabilité", "poids": 0.4 },
+      { "nom": "halitose (mauvaise haleine)", "poids": 0.3 },
+      { "nom": "éosinophilie sanguine élevée", "poids": 0.8 }
+    ]
   },
   {
-    "maladie": "diarrhée aiguë",
+    "maladie": "Amibiase hépatique",
+    "gravite": "élevée",
     "symptomes": [
-      { "nom": "diarrhée", "poids": 0.9 },
-      { "nom": "déshydratation", "poids": 0.8 }
-    ],
-    "gravite": "modérée"
+      { "nom": "douleur vive de l'hypocondre droit", "poids": 1.0 },
+      { "nom": "hépatomégalie douloureuse (gros foie)", "poids": 0.9 },
+      { "nom": "fièvre élevée (39°C)", "poids": 0.8 },
+      { "nom": "douleur irradiant vers l'épaule droite", "poids": 0.9 },
+      { "nom": "ébranlement douloureux du foie", "poids": 1.0 },
+      { "nom": "altération de l'état général", "poids": 0.7 },
+      { "nom": "sueurs abondantes", "poids": 0.6 },
+      { "nom": "anorexie", "poids": 0.6 },
+      { "nom": "amaigrissement rapide", "poids": 0.7 },
+      { "nom": "ictère (jaunisse) léger ou absent", "poids": 0.4 },
+      { "nom": "nausées", "poids": 0.5 },
+      { "nom": "langue saburrale", "poids": 0.4 },
+      { "nom": "toux sèche réflexe", "poids": 0.3 },
+      { "nom": "dyspnée (si abcès volumineux)", "poids": 0.5 },
+      { "nom": "hoquet", "poids": 0.4 },
+      { "nom": "antécédent de dysenterie (diarrhée sanglante)", "poids": 0.8 },
+      { "nom": "teint terreux", "poids": 0.6 },
+      {
+        "nom": "douleur à la compression des espaces intercostaux",
+        "poids": 0.9
+      },
+      { "nom": "frissons", "poids": 0.5 },
+      { "nom": "fatigue intense", "poids": 0.6 }
+    ]
   },
   {
-    "maladie": "choléra",
+    "maladie": "Gale (Sokina)",
+    "gravite": "faible",
     "symptomes": [
-      { "nom": "diarrhée sévère", "poids": 1.0 },
-      { "nom": "déshydratation", "poids": 1.0 }
-    ],
-    "gravite": "critique"
+      {
+        "nom": "démangeaisons (prurit) à recrudescence nocturne",
+        "poids": 1.0
+      },
+      { "nom": "sillons scabieux (petits traits grisâtres)", "poids": 1.0 },
+      { "nom": "vésicules perlées entre les doigts", "poids": 0.9 },
+      { "nom": "lésions au niveau des poignets", "poids": 0.8 },
+      { "nom": "lésions au niveau des coudes", "poids": 0.7 },
+      { "nom": "lésions aux plis de l'aine", "poids": 0.8 },
+      { "nom": "lésions autour du nombril", "poids": 0.7 },
+      { "nom": "atteinte des mamelons (chez la femme)", "poids": 0.7 },
+      {
+        "nom": "atteinte des organes génitaux (chancre scabieux)",
+        "poids": 0.9
+      },
+      { "nom": "lésions de grattage (excoriations)", "poids": 0.6 },
+      { "nom": "croûtes cutanées", "poids": 0.5 },
+      { "nom": "surinfection (impétiginisation)", "poids": 0.6 },
+      {
+        "nom": "absence de lésions sur le visage (chez l'adulte)",
+        "poids": 0.8
+      },
+      { "nom": "atteinte palmo-plantaire (chez le nourrisson)", "poids": 0.9 },
+      {
+        "nom": "prurit familial (plusieurs personnes atteintes)",
+        "poids": 0.9
+      },
+      { "nom": "petites papules rouges", "poids": 0.5 },
+      { "nom": "irritabilité due au manque de sommeil", "poids": 0.4 },
+      { "nom": "nodules scabieux (post-traitement parfois)", "poids": 0.6 },
+      { "nom": "ganglions enflés (si infection secondaire)", "poids": 0.4 },
+      { "nom": "rougeur diffuse des zones atteintes", "poids": 0.5 }
+    ]
   },
   {
-    "maladie": "appendicite",
+    "maladie": "Trachome",
+    "gravite": "élevée",
+    "conditions": { "manque_eau_propre": true, "hygiène_précaire": true },
     "symptomes": [
-      { "nom": "douleur abdominale", "poids": 0.9 },
-      { "nom": "nausée", "poids": 0.6 }
-    ],
-    "gravite": "élevée"
+      { "nom": "irritation oculaire chronique", "poids": 0.8 },
+      {
+        "nom": "trichiasis (retournement des cils vers l'intérieur)",
+        "poids": 1.0
+      },
+      { "nom": "entropion (enroulement de la paupière)", "poids": 1.0 },
+      { "nom": "opacité cornéenne", "poids": 0.9 },
+      {
+        "nom": "follicules conjonctivaux (petites boules sous la paupière)",
+        "poids": 0.9
+      },
+      { "nom": "cicatrisation conjonctivale", "poids": 0.9 },
+      { "nom": "photophobie (sensibilité à la lumière)", "poids": 0.7 },
+      { "nom": "larmoiement excessif", "poids": 0.6 },
+      { "nom": "sensation de corps étranger dans l'œil", "poids": 0.8 },
+      { "nom": "écoulement oculaire muco-purulent", "poids": 0.7 },
+      { "nom": "gonflement des paupières", "poids": 0.5 },
+      { "nom": "douleur oculaire", "poids": 0.6 },
+      { "nom": "vision floue", "poids": 0.7 },
+      { "nom": "rougeur oculaire persistante", "poids": 0.6 },
+      { "nom": "démangeaisons oculaires", "poids": 0.5 },
+      { "nom": "sécheresse oculaire", "poids": 0.4 },
+      { "nom": "pannus cornéen (vaisseaux sur la cornée)", "poids": 0.8 },
+      { "nom": "perte progressive de l'acuité visuelle", "poids": 0.9 },
+      { "nom": "croûtes sur les cils le matin", "poids": 0.4 },
+      { "nom": "paupières collées au réveil", "poids": 0.5 }
+    ]
   },
   {
-    "maladie": "AVC",
+    "maladie": "Syphilis",
+    "gravite": "élevée",
     "symptomes": [
-      { "nom": "paralysie", "poids": 1.0 },
-      { "nom": "trouble de la parole", "poids": 0.9 }
-    ],
-    "gravite": "critique"
+      {
+        "nom": "chancre inoculatoire (plaie propre et indolore)",
+        "poids": 1.0
+      },
+      {
+        "nom": "adénopathie satellite (ganglion) non douloureuse",
+        "poids": 0.9
+      },
+      { "nom": "roséole (taches roses discrètes sur le tronc)", "poids": 0.8 },
+      {
+        "nom": "syphilides palmo-plantaires (éruptions mains/pieds)",
+        "poids": 1.0
+      },
+      { "nom": "plaques fauchées sur la langue", "poids": 0.7 },
+      {
+        "nom": "alopécie en aires (perte de cheveux par plaques)",
+        "poids": 0.6
+      },
+      { "nom": "fièvre modérée", "poids": 0.4 },
+      { "nom": "céphalées nocturnes", "poids": 0.5 },
+      { "nom": "douleurs articulaires et osseuses", "poids": 0.4 },
+      { "nom": "angine syphilitique", "poids": 0.5 },
+      { "nom": "condylomes plats (lésions génitales humides)", "poids": 0.9 },
+      { "nom": "méningite syphilitique (stade précoce)", "poids": 0.3 },
+      { "nom": "hépatite syphilitique", "poids": 0.2 },
+      { "nom": "uvéite (inflammation de l'œil)", "poids": 0.3 },
+      {
+        "nom": "gommes syphilitiques (lésions cutanées destructrices)",
+        "poids": 0.8
+      },
+      { "nom": "tabès (perte de coordination/équilibre)", "poids": 0.7 },
+      { "nom": "signe d'Argyll Robertson (pupille)", "poids": 0.9 },
+      { "nom": "aortite syphilitique (douleur thoracique)", "poids": 0.7 },
+      { "nom": "troubles psychiatriques (paralysie générale)", "poids": 0.6 },
+      { "nom": "perte de sensibilité vibratoire", "poids": 0.5 }
+    ]
   },
   {
-    "maladie": "infarctus",
+    "maladie": "Rhinophycomycose",
+    "gravite": "modérée",
+    "conditions": { "zone_tropicale_humide": true, "milieu_rural": true },
     "symptomes": [
-      { "nom": "douleur thoracique", "poids": 1.0 },
-      { "nom": "transpiration", "poids": 0.8 }
-    ],
-    "gravite": "critique"
+      { "nom": "déformation visible de la pyramide nasale", "poids": 1.0 },
+      { "nom": "œdème facial non inflammatoire", "poids": 0.9 },
+      { "nom": "tuméfaction ferme et indolore du nez", "poids": 1.0 },
+      { "nom": "obstruction nasale progressive", "poids": 0.8 },
+      { "nom": "extension du gonflement vers les joues", "poids": 0.7 },
+      {
+        "nom": "extension du gonflement vers la lèvre supérieure",
+        "poids": 0.7
+      },
+      { "nom": "épaississement de la muqueuse nasale", "poids": 0.8 },
+      { "nom": "rhinorrhée (écoulement nasal) clair", "poids": 0.4 },
+      { "nom": "anosmie (perte d'odorat)", "poids": 0.5 },
+      { "nom": "absence de fièvre", "poids": 0.6 },
+      { "nom": "masse sous-cutanée mobile à la palpation", "poids": 0.8 },
+      {
+        "nom": "peau en regard de la lésion normale ou luisante",
+        "poids": 0.7
+      },
+      { "nom": "difficulté à respirer par le nez", "poids": 0.8 },
+      { "nom": "voix nasonnée", "poids": 0.6 },
+      {
+        "nom": "larmoiement par compression des canaux lacrymaux",
+        "poids": 0.5
+      },
+      { "nom": "éternuements fréquents", "poids": 0.3 },
+      { "nom": "sensation de pesanteur faciale", "poids": 0.4 },
+      { "nom": "absence d'adénopathie (pas de ganglion)", "poids": 0.6 },
+      { "nom": "prurit nasal localisé", "poids": 0.3 },
+      { "nom": "déformation du palais (rare)", "poids": 0.2 }
+    ]
   },
   {
-    "maladie": "tuberculose",
+    "maladie": "Hépatite A",
+    "gravite": "modérée",
     "symptomes": [
-      { "nom": "toux chronique", "poids": 0.9 },
-      { "nom": "perte de poids", "poids": 0.7 }
-    ],
-    "gravite": "élevée"
+      { "nom": "ictère (jaunisse des yeux et de la peau)", "poids": 1.0 },
+      { "nom": "urines foncées (couleur bière/thé)", "poids": 1.0 },
+      { "nom": "selles décolorées (mastic/claires)", "poids": 0.9 },
+      { "nom": "fièvre modérée", "poids": 0.6 },
+      { "nom": "nausées et vomissements", "poids": 0.7 },
+      { "nom": "anorexie (perte d'appétit)", "poids": 0.8 },
+      { "nom": "douleur de l'hypocondre droit (foie)", "poids": 0.7 },
+      { "nom": "fatigue intense (asthénie)", "poids": 0.9 },
+      { "nom": "prurit (démangeaisons cutanées)", "poids": 0.6 },
+      { "nom": "céphalées", "poids": 0.4 },
+      { "nom": "myalgies (douleurs musculaires)", "poids": 0.5 },
+      { "nom": "arthralgies (douleurs articulaires)", "poids": 0.5 },
+      { "nom": "goût amer dans la bouche", "poids": 0.4 },
+      { "nom": "dégoût pour le tabac ou certains aliments", "poids": 0.6 },
+      { "nom": "ballonnements", "poids": 0.4 },
+      { "nom": "diarrhée ou constipation", "poids": 0.3 },
+      { "nom": "perte de poids légère", "poids": 0.4 },
+      { "nom": "transaminases très élevées (biologie)", "poids": 1.0 },
+      { "nom": "hépatomégalie modérée", "poids": 0.6 },
+      { "nom": "malaise généralisé", "poids": 0.6 }
+    ]
   },
   {
-    "maladie": "anémie",
+    "maladie": "Rougeole (Kitrotro)",
+    "gravite": "élevée",
     "symptomes": [
-      { "nom": "fatigue", "poids": 0.8 },
-      { "nom": "pâleur", "poids": 0.7 }
-    ],
-    "gravite": "modérée"
+      {
+        "nom": "taches de Koplik (petits points blancs dans la bouche)",
+        "poids": 1.0
+      },
+      { "nom": "éruption maculo-papuleuse descendante", "poids": 1.0 },
+      { "nom": "fièvre élevée (> 39.5°C)", "poids": 0.9 },
+      { "nom": "toux forte et sèche", "poids": 0.8 },
+      { "nom": "conjonctivite avec larmoiement", "poids": 0.8 },
+      { "nom": "photophobie (douleur à la lumière)", "poids": 0.8 },
+      { "nom": "rhinite (nez qui coule abondamment)", "poids": 0.7 },
+      { "nom": "catarrhe oculo-nasal (visage 'sale' et bouffi)", "poids": 0.9 },
+      { "nom": "adénopathies cervicales (ganglions au cou)", "poids": 0.5 },
+      { "nom": "diarrhée sévère", "poids": 0.6 },
+      { "nom": "anorexie", "poids": 0.6 },
+      { "nom": "vomissements", "poids": 0.4 },
+      { "nom": "malaise général", "poids": 0.7 },
+      { "nom": "desquamation fine de la peau après l'éruption", "poids": 0.6 },
+      { "nom": "irritabilité et pleurs fréquents", "poids": 0.5 },
+      { "nom": "somnolence", "poids": 0.4 },
+      { "nom": "amygdales rouges", "poids": 0.3 },
+      { "nom": "accélération du rythme respiratoire", "poids": 0.6 },
+      { "nom": "déshydratation", "poids": 0.5 },
+      { "nom": "signes de malnutrition aggravés", "poids": 0.5 }
+    ]
   },
   {
-    "maladie": "hypertension",
+    "maladie": "Teigne (Sali)",
+    "gravite": "faible",
     "symptomes": [
-      { "nom": "maux de tête", "poids": 0.6 },
-      { "nom": "vertiges", "poids": 0.5 }
-    ],
-    "gravite": "variable"
+      {
+        "nom": "plaques d'alopécie (perte de cheveux) arrondies",
+        "poids": 1.0
+      },
+      { "nom": "cheveux cassés très courts à la surface", "poids": 0.9 },
+      {
+        "nom": "squames (pellicules) grisâtres sur le cuir chevelu",
+        "poids": 0.9
+      },
+      { "nom": "démangeaisons (prurit) du cuir chevelu", "poids": 0.7 },
+      { "nom": "inflammation cutanée (rougeur)", "poids": 0.6 },
+      { "nom": "kérion (gonflement inflammatoire douloureux)", "poids": 0.8 },
+      { "nom": "suppuration au niveau des follicules", "poids": 0.7 },
+      { "nom": "croûtes jaunâtres", "poids": 0.6 },
+      { "nom": "adénopathies (ganglions) cervicales", "poids": 0.5 },
+      { "nom": "cheveux ternes et fragiles", "poids": 0.5 },
+      { "nom": "extension centrifuge des plaques", "poids": 0.7 },
+      { "nom": "desquamation fine", "poids": 0.4 },
+      { "nom": "brillance anormale sous lumière de Wood", "poids": 1.0 },
+      { "nom": "lésions cutanées en anneau sur le corps", "poids": 0.8 },
+      { "nom": "bordure inflammatoire des lésions", "poids": 0.7 },
+      { "nom": "guérison centrale des plaques cutanées", "poids": 0.6 },
+      { "nom": "irritabilité chez l'enfant", "poids": 0.3 },
+      { "nom": "transmission familiale ou scolaire", "poids": 0.8 },
+      { "nom": "contact avec animaux domestiques", "poids": 0.6 },
+      { "nom": "ongles épaissis ou jaunis (rarement)", "poids": 0.2 }
+    ]
   },
   {
-    "maladie": "méningite",
+    "maladie": "Mycose cutanée (Pityriasis versicolor)",
+    "gravite": "faible",
     "symptomes": [
-      { "nom": "fièvre", "poids": 0.9 },
-      { "nom": "raideur de la nuque", "poids": 1.0 }
-    ],
-    "gravite": "critique"
+      {
+        "nom": "taches blanches (hypochromiques) sur peau bronzée",
+        "poids": 1.0
+      },
+      { "nom": "taches brunes ou rosées sur peau claire", "poids": 0.9 },
+      { "nom": "fines squames au grattage (signe du copeau)", "poids": 1.0 },
+      { "nom": "siège préférentiel sur le dos", "poids": 0.8 },
+      { "nom": "siège sur le thorax et les épaules", "poids": 0.8 },
+      { "nom": "légères démangeaisons lors de la sudation", "poids": 0.6 },
+      { "nom": "confluence des taches en grandes nappes", "poids": 0.7 },
+      { "nom": "absence d'inflammation", "poids": 0.5 },
+      { "nom": "contours nets des taches", "poids": 0.6 },
+      { "nom": "recrudescence après exposition solaire", "poids": 0.7 },
+      { "nom": "prurit modéré", "poids": 0.4 },
+      { "nom": "atteinte du cou", "poids": 0.5 },
+      { "nom": "atteinte de la racine des bras", "poids": 0.5 },
+      { "nom": "peau d'aspect mat", "poids": 0.3 },
+      { "nom": "fluorescence jaune-vert (Lumière de Wood)", "poids": 0.9 },
+      { "nom": "caractère récidivant", "poids": 0.6 },
+      { "nom": "aggravation en climat humide", "poids": 0.7 },
+      { "nom": "absence de douleur", "poids": 0.5 },
+      {
+        "nom": "persistance des taches claires après traitement",
+        "poids": 0.4
+      },
+      { "nom": "gêne esthétique prédominante", "poids": 0.3 }
+    ]
   },
   {
-    "maladie": "otite",
-    "symptomes": [{ "nom": "douleur oreille", "poids": 0.8 }],
-    "gravite": "faible"
-  },
-  {
-    "maladie": "ulcère gastrique",
+    "maladie": "Tétanos néonatal",
+    "gravite": "critique",
+    "conditions": { "accouchement_non_stérile": true, "cordon_souillé": true },
     "symptomes": [
-      { "nom": "douleur abdominale", "poids": 0.7 },
-      { "nom": "brûlure", "poids": 0.6 }
-    ],
-    "gravite": "modérée"
+      { "nom": "incapacité brutale de téter (trismus)", "poids": 1.0 },
+      { "nom": "rigidité musculaire généralisée", "poids": 1.0 },
+      { "nom": "spasmes musculaires déclenchés par le bruit", "poids": 0.9 },
+      {
+        "nom": "spasmes déclenchés par la lumière ou le toucher",
+        "poids": 0.9
+      },
+      { "nom": "opisthotonos (corps arqué vers l'arrière)", "poids": 1.0 },
+      {
+        "nom": "faciès sardonique (contraction des muscles du visage)",
+        "poids": 0.9
+      },
+      { "nom": "mains crispées et pieds en extension", "poids": 0.8 },
+      { "nom": "pleurs incessants ou impossibilité de pleurer", "poids": 0.7 },
+      { "nom": "fièvre modérée ou élevée", "poids": 0.6 },
+      { "nom": "difficultés respiratoires (apnée)", "poids": 0.9 },
+      { "nom": "nombril inflammatoire ou purulent", "poids": 0.8 },
+      { "nom": "tachycardie", "poids": 0.7 },
+      { "nom": "sudation excessive", "poids": 0.5 },
+      { "nom": "abdomen dur 'en ventre de bois'", "poids": 0.9 },
+      { "nom": "troubles du rythme cardiaque", "poids": 0.6 },
+      { "nom": "cyanose lors des spasmes", "poids": 0.8 },
+      { "nom": "constipation", "poids": 0.3 },
+      { "nom": "rétention d'urine", "poids": 0.4 },
+      { "nom": "hyperextension des membres", "poids": 0.8 },
+      { "nom": "déshydratation rapide", "poids": 0.6 }
+    ]
   },
   {
-    "maladie": "insuffisance respiratoire",
+    "maladie": "Paludisme grave (Neuropaludisme)",
+    "gravite": "critique",
     "symptomes": [
-      { "nom": "essoufflement", "poids": 1.0 },
-      { "nom": "cyanose", "poids": 1.0 }
-    ],
-    "gravite": "critique"
+      { "nom": "coma ou altération profonde de la conscience", "poids": 1.0 },
+      { "nom": "convulsions répétées (> 2 en 24h)", "poids": 1.0 },
+      {
+        "nom": "détresse respiratoire (respiration de Kussmaul)",
+        "poids": 0.9
+      },
+      { "nom": "ictère (jaunisse) marqué", "poids": 0.8 },
+      { "nom": "anémie sévère (pâleur extrême)", "poids": 0.9 },
+      { "nom": "hémoglobinurie (urines couleur Coca-Cola)", "poids": 0.9 },
+      { "nom": "hypoglycémie", "poids": 0.8 },
+      { "nom": "acidose métabolique", "poids": 0.8 },
+      { "nom": "insuffisance rénale (oligurie)", "poids": 0.7 },
+      { "nom": "collapsus cardiovasculaire (choc)", "poids": 0.9 },
+      { "nom": "saignements spontanés (CIVD)", "poids": 0.7 },
+      { "nom": "fièvre très élevée (> 40°C) ou hypothermie", "poids": 0.7 },
+      { "nom": "vomissements incoercibles", "poids": 0.6 },
+      { "nom": "prostration (incapacité de s'asseoir)", "poids": 0.9 },
+      { "nom": "hyperparasitémie (> 5% de globules infectés)", "poids": 1.0 },
+      { "nom": "troubles du comportement", "poids": 0.7 },
+      { "nom": "raideur de la nuque (parfois)", "poids": 0.5 },
+      { "nom": "œdème pulmonaire", "poids": 0.8 },
+      { "nom": "splénomégalie douloureuse", "poids": 0.6 },
+      { "nom": "regard plafonnant ou dévié", "poids": 0.8 }
+    ]
   },
   {
-    "maladie": "déshydratation sévère",
+    "maladie": "Asthme aigu",
+    "gravite": "variable",
     "symptomes": [
-      { "nom": "soif intense", "poids": 0.9 },
-      { "nom": "fatigue", "poids": 0.7 }
-    ],
-    "gravite": "élevée"
+      {
+        "nom": "respiration sifflante (wheezing) à l'expiration",
+        "poids": 1.0
+      },
+      { "nom": "dyspnée (difficulté à respirer) expiratoire", "poids": 1.0 },
+      { "nom": "oppression thoracique", "poids": 0.9 },
+      { "nom": "toux sèche nocturne", "poids": 0.8 },
+      { "nom": "essoufflement au repos", "poids": 0.9 },
+      { "nom": "difficulté à finir ses phrases", "poids": 0.9 },
+      { "nom": "tirage intercostal", "poids": 0.8 },
+      { "nom": "tachypnée (fréquence respiratoire élevée)", "poids": 0.7 },
+      {
+        "nom": "utilisation des muscles respiratoires accessoires",
+        "poids": 0.8
+      },
+      { "nom": "tachycardie", "poids": 0.6 },
+      { "nom": "anxiété et agitation", "poids": 0.7 },
+      { "nom": "sueur froide", "poids": 0.6 },
+      { "nom": "cyanose des lèvres (signe de gravité)", "poids": 0.9 },
+      {
+        "nom": "silence auscultatoire (asthme dépassant le stade de sifflement)",
+        "poids": 1.0
+      },
+      { "nom": "expectorations perlées (en fin de crise)", "poids": 0.5 },
+      { "nom": "distension thoracique", "poids": 0.6 },
+      { "nom": "somnolence (signe d'épuisement)", "poids": 0.9 },
+      {
+        "nom": "diminution du débit expiratoire de pointe (DEP)",
+        "poids": 1.0
+      },
+      { "nom": "toux déclenchée par l'effort", "poids": 0.7 },
+      { "nom": "antécédents familiaux d'atopie", "poids": 0.6 }
+    ]
   },
   {
-    "maladie": "allergie",
+    "maladie": "COVID-19",
+    "gravite": "variable",
     "symptomes": [
-      { "nom": "éruption cutanée", "poids": 0.8 },
-      { "nom": "démangeaisons", "poids": 0.7 }
-    ],
-    "gravite": "faible"
+      { "nom": "anosmie (perte d'odorat)", "poids": 1.0 },
+      { "nom": "agueusie (perte de goût)", "poids": 1.0 },
+      { "nom": "fièvre ou frissons", "poids": 0.7 },
+      { "nom": "toux sèche persistante", "poids": 0.8 },
+      { "nom": "fatigue intense (asthénie)", "poids": 0.7 },
+      { "nom": "douleurs musculaires (myalgies)", "poids": 0.6 },
+      { "nom": "céphalées (maux de tête)", "poids": 0.6 },
+      { "nom": "maux de gorge", "poids": 0.5 },
+      { "nom": "congestion nasale", "poids": 0.4 },
+      { "nom": "essoufflement (dyspnée)", "poids": 0.8 },
+      { "nom": "oppression thoracique", "poids": 0.7 },
+      { "nom": "diarrhée", "poids": 0.3 },
+      { "nom": "nausées ou vomissements", "poids": 0.3 },
+      { "nom": "éruptions cutanées (pseudo-engelures)", "poids": 0.4 },
+      { "nom": "conjonctivite", "poids": 0.2 },
+      { "nom": "confusion mentale (chez les âgés)", "poids": 0.6 },
+      { "nom": "baisse de la saturation en oxygène", "poids": 0.9 },
+      { "nom": "douleurs articulaires", "poids": 0.4 },
+      { "nom": "perte d'appétit", "poids": 0.5 },
+      { "nom": "vertiges", "poids": 0.3 }
+    ]
+  },
+  {
+    "maladie": "Pneumonie bactérienne",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "toux avec crachats jaunâtres ou verdâtres", "poids": 1.0 },
+      { "nom": "douleur thoracique pointue à l'inspiration", "poids": 0.9 },
+      { "nom": "fièvre élevée brutale (> 39°C)", "poids": 0.8 },
+      { "nom": "difficulté respiratoire (dyspnée)", "poids": 0.9 },
+      { "nom": "frissons claquants", "poids": 0.8 },
+      { "nom": "tachypnée (respiration rapide)", "poids": 0.7 },
+      { "nom": "râles crépitants à l'auscultation", "poids": 0.9 },
+      { "nom": "cyanose des lèvres ou des ongles", "poids": 0.8 },
+      { "nom": "malaise généralisé", "poids": 0.6 },
+      { "nom": "tachycardie (cœur rapide)", "poids": 0.6 },
+      { "nom": "confusion mentale", "poids": 0.7 },
+      { "nom": "sueurs nocturnes", "poids": 0.5 },
+      { "nom": "fatigue extrême", "poids": 0.7 },
+      { "nom": "anorexie (perte d'appétit)", "poids": 0.5 },
+      { "nom": "céphalées", "poids": 0.4 },
+      { "nom": "myalgies", "poids": 0.4 },
+      { "nom": "douleur abdominale (si base du poumon)", "poids": 0.5 },
+      { "nom": "matité à la percussion du thorax", "poids": 0.7 },
+      { "nom": "herpès labial (souvent associé au pneumocoque)", "poids": 0.4 },
+      { "nom": "expectorations rouillées (sang dégradé)", "poids": 0.8 }
+    ]
+  },
+  {
+    "maladie": "Diarrhée aiguë (Gastro-entérite)",
+    "gravite": "modérée",
+    "symptomes": [
+      { "nom": "selles liquides fréquentes (>3/jour)", "poids": 1.0 },
+      { "nom": "crampes abdominales", "poids": 0.8 },
+      { "nom": "nausées", "poids": 0.7 },
+      { "nom": "vomissements", "poids": 0.7 },
+      { "nom": "fièvre modérée", "poids": 0.5 },
+      { "nom": "soif intense", "poids": 0.8 },
+      { "nom": "bouche et langue sèches", "poids": 0.9 },
+      { "nom": "urines rares et foncées", "poids": 0.8 },
+      { "nom": "yeux cernés ou enfoncés", "poids": 0.7 },
+      { "nom": "pli cutané persistant", "poids": 0.9 },
+      { "nom": "fatigue ou léthargie", "poids": 0.6 },
+      { "nom": "perte d'appétit", "poids": 0.5 },
+      { "nom": "ballonnements", "poids": 0.4 },
+      { "nom": "borborygmes (bruit de ventre)", "poids": 0.5 },
+      { "nom": "maux de tête", "poids": 0.4 },
+      { "nom": "vertiges en se levant", "poids": 0.6 },
+      { "nom": "pâleur", "poids": 0.4 },
+      { "nom": "ténesme (besoin douloureux d'aller à la selle)", "poids": 0.6 },
+      { "nom": "douleurs musculaires", "poids": 0.3 },
+      { "nom": "irritabilité (chez l'enfant)", "poids": 0.7 }
+    ]
+  },
+  {
+    "maladie": "Appendicite aiguë",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "douleur localisée en fosse iliaque droite", "poids": 1.0 },
+      { "nom": "douleur débutant autour du nombril", "poids": 0.8 },
+      { "nom": "signe de Blumberg (douleur au relâché)", "poids": 0.9 },
+      { "nom": "défense abdominale (ventre tendu)", "poids": 0.9 },
+      { "nom": "nausées", "poids": 0.7 },
+      { "nom": "vomissements", "poids": 0.6 },
+      { "nom": "perte d'appétit brutale (anorexie)", "poids": 0.8 },
+      { "nom": "fébricule (fièvre entre 37.5°C et 38.5°C)", "poids": 0.7 },
+      { "nom": "constipation récente", "poids": 0.5 },
+      { "nom": "arrêt des gaz (parfois)", "poids": 0.4 },
+      { "nom": "langue saburrale (blanche)", "poids": 0.5 },
+      { "nom": "douleur à la marche ou à la toux", "poids": 0.8 },
+      {
+        "nom": "psoïtis (douleur à l'extension de la jambe droite)",
+        "poids": 0.8
+      },
+      { "nom": "tachycardie modérée", "poids": 0.5 },
+      { "nom": "insomnie due à la douleur", "poids": 0.6 },
+      { "nom": "douleur à la miction (si appendice bas)", "poids": 0.4 },
+      { "nom": "diarrhée (rare, appendice rétro-cæcal)", "poids": 0.3 },
+      { "nom": "position antalgique (en chien de fusil)", "poids": 0.7 },
+      { "nom": "augmentation des globules blancs (PNN)", "poids": 0.8 },
+      { "nom": "haleine fétide", "poids": 0.3 }
+    ]
+  },
+  {
+    "maladie": "Tuberculose pulmonaire",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "toux chronique > 3 semaines", "poids": 1.0 },
+      { "nom": "hémoptysie (sang dans les crachats)", "poids": 0.9 },
+      { "nom": "perte de poids involontaire", "poids": 0.9 },
+      { "nom": "sueurs nocturnes abondantes", "poids": 1.0 },
+      { "nom": "fièvre modérée vespérale (le soir)", "poids": 0.9 },
+      { "nom": "fatigue persistante (asthénie)", "poids": 0.7 },
+      { "nom": "douleur thoracique", "poids": 0.6 },
+      { "nom": "essoufflement (dyspnée)", "poids": 0.7 },
+      { "nom": "anorexie (perte d'appétit)", "poids": 0.8 },
+      { "nom": "pâleur cutanée", "poids": 0.5 },
+      { "nom": "râles crépitants aux sommets des poumons", "poids": 0.8 },
+      { "nom": "adénopathies (ganglions) cervicaux", "poids": 0.6 },
+      { "nom": "frissons", "poids": 0.4 },
+      { "nom": "malaise général", "poids": 0.5 },
+      { "nom": "tachycardie de repos", "poids": 0.4 },
+      { "nom": "aménorrhée (arrêt des règles chez la femme)", "poids": 0.5 },
+      { "nom": "hypocratisme digital (ongles bombés)", "poids": 0.4 },
+      { "nom": "vitesse de sédimentation très élevée", "poids": 0.7 },
+      { "nom": "douleurs dorsales", "poids": 0.3 },
+      { "nom": "matité thoracique localisée", "poids": 0.6 }
+    ]
+  },
+  {
+    "maladie": "Méningite aiguë",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "raideur de la nuque", "poids": 1.0 },
+      { "nom": "fièvre élevée brutale", "poids": 0.9 },
+      { "nom": "céphalées en casque insupportables", "poids": 1.0 },
+      { "nom": "photophobie (peur de la lumière)", "poids": 0.9 },
+      { "nom": "phonophobie (peur du bruit)", "poids": 0.8 },
+      { "nom": "vomissements en jet sans nausées", "poids": 0.9 },
+      { "nom": "signe de Kernig (douleur jambe levée)", "poids": 0.9 },
+      { "nom": "signe de Brudzinski (flexion nuque/genou)", "poids": 0.9 },
+      { "nom": "purpura fulminans (taches rouges/bleues)", "poids": 1.0 },
+      { "nom": "confusion mentale", "poids": 0.8 },
+      { "nom": "somnolence ou coma", "poids": 0.8 },
+      { "nom": "convulsions", "poids": 0.7 },
+      { "nom": "agitation psychomotrice", "poids": 0.6 },
+      { "nom": "fontanelle bombée (chez le nourrisson)", "poids": 1.0 },
+      { "nom": "teint grisâtre", "poids": 0.5 },
+      { "nom": "tachycardie", "poids": 0.5 },
+      { "nom": "hyperesthésie cutanée (douleur au toucher)", "poids": 0.7 },
+      { "nom": "position en chien de fusil", "poids": 0.8 },
+      { "nom": "troubles du rythme respiratoire", "poids": 0.6 },
+      { "nom": "déshydratation", "poids": 0.4 }
+    ]
+  },
+  {
+    "maladie": "Anémie sévère",
+    "gravite": "modérée",
+    "symptomes": [
+      { "nom": "pâleur des conjonctives", "poids": 1.0 },
+      { "nom": "pâleur des paumes des mains", "poids": 0.9 },
+      { "nom": "fatigue extrême (asthénie)", "poids": 0.9 },
+      { "nom": "essoufflement au moindre effort", "poids": 0.8 },
+      { "nom": "palpitations cardiaques (tachycardie)", "poids": 0.8 },
+      { "nom": "vertiges et étourdissements", "poids": 0.7 },
+      { "nom": "céphalées", "poids": 0.5 },
+      { "nom": "acouphènes (bourdonnements d'oreilles)", "poids": 0.6 },
+      { "nom": "mains et pieds froids", "poids": 0.5 },
+      { "nom": "ongles cassants ou concaves (koïlonychie)", "poids": 0.6 },
+      { "nom": "chute de cheveux", "poids": 0.4 },
+      { "nom": "difficulté de concentration", "poids": 0.6 },
+      { "nom": "irritabilité", "poids": 0.4 },
+      { "nom": "douleurs thoraciques (angor fonctionnel)", "poids": 0.6 },
+      { "nom": "glossite (langue dépapillée/lisse)", "poids": 0.5 },
+      { "nom": "fissures au coin des lèvres (perlèche)", "poids": 0.5 },
+      { "nom": "pica (envie de manger de la terre/glace)", "poids": 0.4 },
+      { "nom": "somnolence diurne", "poids": 0.5 },
+      { "nom": "œdème des chevilles", "poids": 0.3 },
+      { "nom": "lipothymie (malaise)", "poids": 0.7 }
+    ]
+  },
+  {
+    "maladie": "Lupus érythémateux disséminé",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "érythème facial en 'ailes de papillon'", "poids": 1.0 },
+      { "nom": "douleurs articulaires (arthralgies)", "poids": 0.9 },
+      { "nom": "photosensibilité (réaction au soleil)", "poids": 0.9 },
+      { "nom": "fièvre prolongée inexpliquée", "poids": 0.7 },
+      { "nom": "fatigue intense", "poids": 0.8 },
+      { "nom": "perte de cheveux (alopécie)", "poids": 0.7 },
+      { "nom": "phénomène de Raynaud (doigts blancs au froid)", "poids": 0.7 },
+      { "nom": "ulcères buccaux indolores", "poids": 0.6 },
+      { "nom": "douleur thoracique (pleurésie/péricardite)", "poids": 0.8 },
+      { "nom": "gonflement des articulations", "poids": 0.7 },
+      { "nom": "protéinurie (mousse dans les urines)", "poids": 0.8 },
+      { "nom": "œdèmes des membres inférieurs", "poids": 0.6 },
+      { "nom": "troubles de la mémoire (fog)", "poids": 0.5 },
+      { "nom": "anxiété ou dépression", "poids": 0.4 },
+      { "nom": "adénopathies (ganglions)", "poids": 0.5 },
+      { "nom": "anémie", "poids": 0.6 },
+      { "nom": "leucopénie (baisse globules blancs)", "poids": 0.7 },
+      { "nom": "convulsions ou psychose", "poids": 0.6 },
+      { "nom": "purpura", "poids": 0.5 },
+      { "nom": "amaigrissement", "poids": 0.5 }
+    ]
+  },
+  {
+    "maladie": "Glaucome à angle ouvert",
+    "gravite": "élevée",
+    "symptomes": [
+      { "nom": "perte de vision périphérique (scotome)", "poids": 1.0 },
+      { "nom": "vision tunnel (stade avancé)", "poids": 1.0 },
+      { "nom": "pression intraoculaire élevée", "poids": 0.9 },
+      { "nom": "vision floue intermittente", "poids": 0.6 },
+      { "nom": "halos colorés autour des lumières", "poids": 0.7 },
+      { "nom": "difficulté d'adaptation à l'obscurité", "poids": 0.6 },
+      { "nom": "besoin fréquent de changer de lunettes", "poids": 0.5 },
+      { "nom": "céphalées légères frontales", "poids": 0.4 },
+      { "nom": "douleur oculaire sourde", "poids": 0.4 },
+      { "nom": "rougeur oculaire discrète", "poids": 0.3 },
+      { "nom": "diminution du contraste", "poids": 0.5 },
+      { "nom": "excavation du nerf optique (fond d'œil)", "poids": 1.0 },
+      { "nom": "asymétrie de vision entre les deux yeux", "poids": 0.6 },
+      { "nom": "larmoiement réflexe", "poids": 0.2 },
+      { "nom": "fatigue visuelle", "poids": 0.3 },
+      { "nom": "sensibilité accrue à l'éblouissement", "poids": 0.5 },
+      { "nom": "difficulté à lire", "poids": 0.4 },
+      { "nom": "perte de vision centrale (stade terminal)", "poids": 0.8 },
+      { "nom": "nausées (si pics de pression)", "poids": 0.2 },
+      { "nom": "atrophie optique", "poids": 0.9 }
+    ]
+  },
+  {
+    "maladie": "Insuffisance respiratoire chronique",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "dyspnée d'effort", "poids": 1.0 },
+      { "nom": "cyanose (lèvres et ongles bleus)", "poids": 1.0 },
+      { "nom": "utilisation des muscles accessoires", "poids": 0.9 },
+      { "nom": "toux productive chronique", "poids": 0.7 },
+      { "nom": "somnolence diurne (hypercapnie)", "poids": 0.8 },
+      { "nom": "céphalées matinales", "poids": 0.6 },
+      { "nom": "hypocratisme digital", "poids": 0.8 },
+      { "nom": "œdème des membres inférieurs", "poids": 0.7 },
+      { "nom": "tachycardie", "poids": 0.6 },
+      {
+        "nom": "tachypnée (respiration rapide et superficielle)",
+        "poids": 0.9
+      },
+      { "nom": "confusion mentale", "poids": 0.7 },
+      { "nom": "astérixis (tremblement des mains)", "poids": 0.8 },
+      { "nom": "fatigue musculaire", "poids": 0.6 },
+      { "nom": "perte de poids (cachexie respiratoire)", "poids": 0.7 },
+      { "nom": "difficulté à parler", "poids": 0.8 },
+      { "nom": "anxiété liée au manque d'air", "poids": 0.7 },
+      { "nom": "bruit respiratoire (râles/sifflements)", "poids": 0.6 },
+      { "nom": "thorax en tonneau", "poids": 0.7 },
+      { "nom": "polyglobulie (teint rougeau)", "poids": 0.5 },
+      { "nom": "tirage sus-sternal", "poids": 0.9 }
+    ]
+  },
+  {
+    "maladie": "Fièvre Jaune",
+    "gravite": "critique",
+    "conditions": { "zone_tropicale": true, "statut_vaccinal": "non_vacciné" },
+    "symptomes": [
+      { "nom": "fièvre brutale et élevée", "poids": 1.0 },
+      { "nom": "ictère (jaunisse) précoce", "poids": 0.9 },
+      { "nom": "hématémèse (vomissement de sang noir)", "poids": 1.0 },
+      { "nom": "douleurs lombaires intenses", "poids": 0.8 },
+      { "nom": "céphalées sévères", "poids": 0.7 },
+      { "nom": "myalgies diffuses", "poids": 0.7 },
+      { "nom": "signe de Faget (pouls lent malgré la fièvre)", "poids": 0.9 },
+      { "nom": "oligurie (baisse des urines)", "poids": 0.8 },
+      { "nom": "épistaxis (saignement de nez)", "poids": 0.6 },
+      { "nom": "gingivorragies (saignement des gencives)", "poids": 0.7 },
+      { "nom": "douleurs épigastriques", "poids": 0.6 },
+      { "nom": "nausées et vomissements", "poids": 0.5 },
+      { "nom": "prostration", "poids": 0.8 },
+      { "nom": "visage injecté (rougeur faciale)", "poids": 0.6 },
+      { "nom": "albumine dans les urines", "poids": 0.7 },
+      { "nom": "pétéchies (petites taches rouges)", "poids": 0.5 },
+      { "nom": "confusion mentale", "poids": 0.7 },
+      { "nom": "insuffisance hépatique aiguë", "poids": 0.9 },
+      { "nom": "hypotension artérielle", "poids": 0.6 },
+      { "nom": "frissons initiaux", "poids": 0.4 }
+    ]
+  },
+  {
+    "maladie": "Oedème aigu du poumon (OAP)",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "détresse respiratoire brutale (orthopnée)", "poids": 1.0 },
+      { "nom": "râles crépitants 'marée montante'", "poids": 1.0 },
+      { "nom": "expectorations mousseuses rosées", "poids": 0.9 },
+      { "nom": "sensation de noyade imminente", "poids": 1.0 },
+      { "nom": "cyanose des extrémités", "poids": 0.8 },
+      { "nom": "sueurs profuses froides", "poids": 0.8 },
+      { "nom": "tachycardie", "poids": 0.7 },
+      { "nom": "tirage respiratoire", "poids": 0.9 },
+      { "nom": "toux incessante", "poids": 0.7 },
+      { "nom": "angoisse extrême", "poids": 0.9 },
+      { "nom": "hypertension artérielle initiale", "poids": 0.6 },
+      { "nom": "balancement thoraco-abdominal", "poids": 0.8 },
+      { "nom": "oppression thoracique", "poids": 0.7 },
+      { "nom": "épuisement respiratoire", "poids": 0.8 },
+      { "nom": "battement des ailes du nez", "poids": 0.7 },
+      { "nom": "distension des veines jugulaires", "poids": 0.6 },
+      { "nom": "difficulté à parler", "poids": 0.9 },
+      { "nom": "somnolence (signe d'hypercapnie)", "poids": 0.8 },
+      { "nom": "pouls filant", "poids": 0.6 },
+      { "nom": "soif d'air", "poids": 1.0 }
+    ]
+  },
+  {
+    "maladie": "Péritonite",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "contracture abdominale (ventre de bois)", "poids": 1.0 },
+      { "nom": "douleur abdominale brutale et généralisée", "poids": 1.0 },
+      { "nom": "arrêt des matières et des gaz (iléus)", "poids": 0.9 },
+      {
+        "nom": "nausées et vomissements alimentaires puis bilieux",
+        "poids": 0.8
+      },
+      { "nom": "fièvre élevée (> 39°C)", "poids": 0.7 },
+      { "nom": "faciès hippocratique (traits tirés)", "poids": 0.8 },
+      { "nom": "langue rôtie (sèche)", "poids": 0.7 },
+      { "nom": "respiration superficielle rapide", "poids": 0.7 },
+      { "nom": "douleur au cri du douglas (toucher rectal)", "poids": 0.9 },
+      { "nom": "tachycardie", "poids": 0.6 },
+      {
+        "nom": "disparition de la matité hépatique (pneumopéritoine)",
+        "poids": 0.8
+      },
+      { "nom": "météorisme abdominal (ballonnement)", "poids": 0.6 },
+      { "nom": "soif intense", "poids": 0.5 },
+      { "nom": "position antalgique en chien de fusil", "poids": 0.7 },
+      { "nom": "douleur à la percussion du ventre", "poids": 0.9 },
+      { "nom": "hoquet", "poids": 0.4 },
+      { "nom": "hypotension (stade de choc)", "poids": 0.8 },
+      { "nom": "oligurie", "poids": 0.6 },
+      { "nom": "pâleur", "poids": 0.5 },
+      { "nom": "agitation anxieuse", "poids": 0.6 }
+    ]
+  },
+  {
+    "maladie": "Embolie pulmonaire",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "dyspnée brutale (essoufflement soudain)", "poids": 1.0 },
+      { "nom": "douleur thoracique latérale (point de côté)", "poids": 0.9 },
+      { "nom": "hémoptysie (crachats de sang)", "poids": 0.7 },
+      { "nom": "tachycardie inexpliquée", "poids": 0.9 },
+      { "nom": "tachypnée (respiration rapide)", "poids": 0.8 },
+      { "nom": "anxiété ou sensation de mort imminente", "poids": 0.8 },
+      { "nom": "malaise ou syncope", "poids": 0.9 },
+      { "nom": "signes de phlébite (jambe lourde/rouge/chaude)", "poids": 0.8 },
+      { "nom": "fièvre modérée (38°C)", "poids": 0.5 },
+      { "nom": "cyanose de la partie supérieure du corps", "poids": 0.6 },
+      { "nom": "turgescence des veines jugulaires", "poids": 0.7 },
+      { "nom": "hypotension artérielle", "poids": 0.8 },
+      { "nom": "toux sèche irritative", "poids": 0.4 },
+      { "nom": "éclat du deuxième bruit au foyer pulmonaire", "poids": 0.7 },
+      { "nom": "douleur à la palpation du mollet", "poids": 0.6 },
+      { "nom": "diminution de la saturation en oxygène", "poids": 0.9 },
+      { "nom": "sueur froide", "poids": 0.5 },
+      { "nom": "douleur abdominale haute (rare)", "poids": 0.3 },
+      { "nom": "galop droit à l'auscultation", "poids": 0.6 },
+      { "nom": "état de choc", "poids": 0.9 }
+    ]
+  },
+  {
+    "maladie": "Pancréatite aiguë",
+    "gravite": "critique",
+    "symptomes": [
+      { "nom": "douleur épigastrique transfixiante (en barre)", "poids": 1.0 },
+      { "nom": "douleur irradiant vers le dos", "poids": 0.9 },
+      { "nom": "vomissements incoercibles", "poids": 0.8 },
+      { "nom": "nausées persistantes", "poids": 0.7 },
+      { "nom": "météorisme abdominal (ventre gonflé)", "poids": 0.6 },
+      { "nom": "position antalgique en 'chien de fusil'", "poids": 0.8 },
+      { "nom": "fièvre modérée", "poids": 0.5 },
+      { "nom": "signe de Cullen (bleu autour du nombril)", "poids": 0.7 },
+      { "nom": "signe de Grey-Turner (bleu sur les flancs)", "poids": 0.7 },
+      { "nom": "tachycardie", "poids": 0.6 },
+      { "nom": "hypotension", "poids": 0.7 },
+      { "nom": "arrêt des matières et des gaz", "poids": 0.6 },
+      { "nom": "dyspnée", "poids": 0.5 },
+      { "nom": "ictère (si origine biliaire)", "poids": 0.6 },
+      { "nom": "défense abdominale épigastrique", "poids": 0.8 },
+      { "nom": "agitation", "poids": 0.5 },
+      { "nom": "hypocalcémie (signes biologiques)", "poids": 0.6 },
+      { "nom": "oligurie", "poids": 0.5 },
+      { "nom": "pleurésie gauche associée", "poids": 0.4 },
+      { "nom": "lipase sanguine très élevée", "poids": 1.0 }
+    ]
   }
 ]
