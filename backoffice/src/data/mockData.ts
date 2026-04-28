@@ -2,17 +2,7 @@ import type { DatabaseState } from "../types/entities";
 
 export const initialData: DatabaseState = {
   etablissement: [],
-  admin: [
-    {
-      id: 1,
-      nom: "Rakoto",
-      prenom: "Jean",
-      username: "jrakoto",
-      mdp: "admin123",
-      email: "jrakoto@mcas.local",
-      etablissement_id: 1,
-    },
-  ],
+  admin: [],
   personnel: [
     {
       id: 1,

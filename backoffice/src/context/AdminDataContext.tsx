@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialData } from "../data/mockData";
-import type { DatabaseState, EntityKey, Etablissement } from "../types/entities";
+import type { Admin, DatabaseState, EntityKey, Etablissement } from "../types/entities";
 
 type InsertPayload<K extends EntityKey> = Omit<DatabaseState[K][number], "id">;
 type UpdatePayload<K extends EntityKey> = DatabaseState[K][number];
@@ -25,8 +25,19 @@ interface ApiEtablissement {
   categorie: string;
 }
 
+interface ApiAdmin {
+  ID: number;
+  nom: string;
+  prenom: string;
+  username: string;
+  mdp: string;
+  email: string;
+  etablissement_id: number;
+}
+
 const ETABLISSEMENTS_API_URL =
   import.meta.env.VITE_ETABLISSEMENTS_API_URL ?? "http://192.168.0.104:8080/etablissements";
+const ADMINS_API_URL = import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
 
 const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   id: item.ID,
@@ -34,6 +45,16 @@ const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   region: item.region,
   contact: item.contact,
   categorie: item.categorie,
+});
+
+const mapApiAdmin = (item: ApiAdmin): Admin => ({
+  id: item.ID,
+  nom: item.nom,
+  prenom: item.prenom,
+  username: item.username,
+  mdp: item.mdp,
+  email: item.email,
+  etablissement_id: item.etablissement_id,
 });
 
 export function AdminDataProvider({ children }: { children: React.ReactNode }) {
@@ -63,7 +84,29 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
+    const loadAdmins = async () => {
+      try {
+        const response = await fetch(ADMINS_API_URL);
+        if (!response.ok) {
+          throw new Error(`Echec API admins: ${response.status}`);
+        }
+
+        const payload = (await response.json()) as ApiAdmin[];
+        const admins: Admin[] = payload.map(mapApiAdmin);
+
+        if (isMounted) {
+          setData((prev) => ({
+            ...prev,
+            admin: admins,
+          }));
+        }
+      } catch (error) {
+        console.error("Impossible de charger les admins depuis l'API.", error);
+      }
+    };
+
     void loadEtablissements();
+    void loadAdmins();
 
     return () => {
       isMounted = false;
