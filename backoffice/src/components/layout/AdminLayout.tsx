@@ -12,7 +12,11 @@ const navigation = [
   { to: "/ambulances", label: "Ambulances", icon: Hospital },
 ];
 
-export function AdminLayout() {
+interface AdminLayoutProps {
+  onLogout: () => void;
+}
+
+export function AdminLayout({ onLogout }: AdminLayoutProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -56,6 +60,15 @@ export function AdminLayout() {
             );
           })}
         </nav>
+        <div className="border-t border-blue-900/40 p-4">
+          <button
+            type="button"
+            onClick={onLogout}
+            className="w-full rounded-xl bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+          >
+            Se deconnecter
+          </button>
+        </div>
       </aside>
 
       <main className="p-6 lg:ml-72 lg:p-10">
