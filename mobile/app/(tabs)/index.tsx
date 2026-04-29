@@ -4,15 +4,18 @@ import {
   Alert,
   Animated,
   Linking,
+  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const API_URL = 'http://192.168.0.104:8080/predict';
 const AMBULANCE_URL = 'http://192.168.0.104:8080/ambulances';
@@ -83,8 +86,13 @@ export default function HomeScreen() {
   const [currentView, setCurrentView] = useState<AppView>('landing');
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [locationName] = useState('Antsirabe');
+  const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
+  const isSmallPhone = width < 380;
+  const horizontalPadding = isSmallPhone ? 12 : 18;
 
   const pulse = useRef(new Animated.Value(1)).current;
+  const appear = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.loop(
@@ -95,6 +103,14 @@ export default function HomeScreen() {
     ).start();
   }, [pulse]);
 
+  useEffect(() => {
+    Animated.timing(appear, {
+      toValue: 1,
+      duration: 450,
+      useNativeDriver: true,
+    }).start();
+  }, [appear, currentView]);
+
   const allSymptoms = useMemo(
     () =>
       Array.from(new Set(SYMPTOMS))
@@ -104,17 +120,32 @@ export default function HomeScreen() {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.locationPill}>
+    <SafeAreaView style={[styles.container, { paddingTop: Platform.OS === 'android' ? insets.top : 0 }]}>
+      <View style={[styles.locationPill, { marginHorizontal: horizontalPadding }]}>
         <Ionicons name="location" size={16} color="#ef4444" />
         <Text style={styles.locationText}>Ianao dia eto: {locationName}</Text>
       </View>
 
       {currentView === 'landing' && (
-        <View style={styles.centered}>
+        <Animated.View
+          style={[
+            styles.centered,
+            { paddingHorizontal: horizontalPadding, opacity: appear, transform: [{ translateY: appear.interpolate({ inputRange: [0, 1], outputRange: [12, 0] }) }] },
+          ]}>
           <Animated.View style={[styles.heartWrap, { transform: [{ scale: pulse }] }]}>
             <Ionicons name="heart" size={56} color="#dc2626" />
           </Animated.View>
+          <View style={styles.illustrationRow}>
+            <View style={styles.illustrationBadge}>
+              <MaterialCommunityIcons name="hospital-box-outline" size={20} color="#2563eb" />
+            </View>
+            <View style={styles.illustrationBadge}>
+              <Ionicons name="medkit-outline" size={20} color="#0ea5e9" />
+            </View>
+            <View style={styles.illustrationBadge}>
+              <MaterialCommunityIcons name="ambulance" size={20} color="#16a34a" />
+            </View>
+          </View>
           <Text style={styles.title}>MADA-CARE AI</Text>
           <Text style={styles.subtitle}>
             Fitaovana hifidianana toeram-pitsaboana mifanaraka amin ny aretinao.
@@ -123,7 +154,7 @@ export default function HomeScreen() {
             <Text style={styles.primaryBtnText}>Hanomboka</Text>
             <Ionicons name="arrow-forward" size={20} color="#fff" />
           </Pressable>
-        </View>
+        </Animated.View>
       )}
 
       {currentView === 'symptoms' && (
@@ -131,6 +162,7 @@ export default function HomeScreen() {
           allSymptoms={allSymptoms}
           selectedSymptoms={selectedSymptoms}
           setSelectedSymptoms={setSelectedSymptoms}
+          horizontalPadding={horizontalPadding}
           onBack={() => setCurrentView('landing')}
           onContinue={() => setCurrentView('results')}
         />
@@ -140,6 +172,7 @@ export default function HomeScreen() {
         <TriageResultsPage
           locationName={locationName}
           selectedSymptoms={selectedSymptoms}
+          horizontalPadding={horizontalPadding}
           onBack={() => {
             setSelectedSymptoms([]);
             setCurrentView('symptoms');
@@ -154,18 +187,25 @@ function SymptomsPage({
   allSymptoms,
   selectedSymptoms,
   setSelectedSymptoms,
+  horizontalPadding,
   onBack,
   onContinue,
 }: {
   allSymptoms: string[];
   selectedSymptoms: string[];
   setSelectedSymptoms: React.Dispatch<React.SetStateAction<string[]>>;
+  horizontalPadding: number;
   onBack: () => void;
   onContinue: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const appear = useRef(new Animated.Value(0)).current;
   const itemsPerPage = 8;
+
+  useEffect(() => {
+    Animated.timing(appear, { toValue: 1, duration: 350, useNativeDriver: true }).start();
+  }, [appear]);
 
   const filtered = allSymptoms.filter((item) =>
     item.toLowerCase().includes(searchQuery.toLowerCase().trim())
@@ -180,7 +220,9 @@ function SymptomsPage({
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContent}>
+    <Animated.ScrollView
+      contentContainerStyle={[styles.scrollContent, { paddingHorizontal: horizontalPadding }]}
+      style={{ opacity: appear, transform: [{ translateY: appear.interpolate({ inputRange: [0, 1], outputRange: [10, 0] }) }] }}>
       <View style={styles.searchRow}>
         <Ionicons name="search" size={20} color="#64748b" />
         <TextInput
@@ -230,7 +272,10 @@ function SymptomsPage({
       <View style={styles.selectedCard}>
         <Text style={styles.selectedTitle}>Voafidy ({selectedSymptoms.length})</Text>
         {selectedSymptoms.length === 0 ? (
-          <Text style={styles.emptyText}>Mbola tsy misy soritr aretina voafidy.</Text>
+          <View style={styles.emptyStateWrap}>
+            <Ionicons name="sparkles-outline" size={18} color="#94a3b8" />
+            <Text style={styles.emptyText}>Mbola tsy misy soritr aretina voafidy.</Text>
+          </View>
         ) : (
           selectedSymptoms.map((item) => (
             <View key={item} style={styles.selectedItem}>
@@ -252,23 +297,26 @@ function SymptomsPage({
           <Text style={styles.secondaryBtnText}>Hiverina</Text>
         </Pressable>
       </View>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 
 function TriageResultsPage({
   selectedSymptoms,
   locationName,
+  horizontalPadding,
   onBack,
 }: {
   selectedSymptoms: string[];
   locationName: string;
+  horizontalPadding: number;
   onBack: () => void;
 }) {
   const [diagnosis, setDiagnosis] = useState<DiagnosisResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [requestStatus, setRequestStatus] = useState<RequestStatus>('idle');
+  const appear = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const fetchDiagnosis = async () => {
@@ -311,6 +359,10 @@ function TriageResultsPage({
 
     fetchDiagnosis();
   }, [selectedSymptoms, locationName]);
+
+  useEffect(() => {
+    Animated.timing(appear, { toValue: 1, duration: 380, useNativeDriver: true }).start();
+  }, [appear]);
 
   const hasFreeAmbulance = diagnosis?.ambulances?.some((item) => item.status === 'libre') ?? false;
   const isCritical = diagnosis?.urgence === 'critique' || diagnosis?.urgence === 'urgent';
@@ -361,7 +413,9 @@ function TriageResultsPage({
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContent}>
+    <Animated.ScrollView
+      contentContainerStyle={[styles.scrollContent, { paddingHorizontal: horizontalPadding }]}
+      style={{ opacity: appear, transform: [{ translateY: appear.interpolate({ inputRange: [0, 1], outputRange: [10, 0] }) }] }}>
       <View style={[styles.resultHeader, isCritical ? styles.criticalHeader : styles.normalHeader]}>
         <Ionicons name="pulse" size={34} color={isCritical ? '#fff' : '#2563eb'} />
         <Text style={[styles.diseaseText, isCritical && styles.whiteText]}>{diagnosis.maladie}</Text>
@@ -452,7 +506,7 @@ function TriageResultsPage({
       <Pressable onPress={onBack} style={styles.secondaryBtn}>
         <Text style={styles.secondaryBtnText}>Hiverina am-piandohana</Text>
       </Pressable>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 
@@ -462,7 +516,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8fafc',
   },
   locationPill: {
-    marginHorizontal: 12,
     marginTop: 8,
     marginBottom: 4,
     backgroundColor: '#ffffff',
@@ -504,6 +557,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#2563eb',
     textAlign: 'center',
+    letterSpacing: -0.3,
   },
   subtitle: {
     marginTop: 10,
@@ -512,6 +566,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 22,
     marginBottom: 24,
+  },
+  illustrationRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 12,
+  },
+  illustrationBadge: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#dbeafe',
   },
   primaryBtn: {
     backgroundColor: '#2563eb',
@@ -529,7 +598,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   scrollContent: {
-    paddingHorizontal: 12,
     paddingBottom: 32,
     gap: 12,
   },
@@ -558,6 +626,11 @@ const styles = StyleSheet.create({
     borderColor: '#e2e8f0',
     padding: 14,
     gap: 12,
+    shadowColor: '#0f172a',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 2,
   },
   cardTitle: {
     color: '#1e3a8a',
@@ -619,6 +692,16 @@ const styles = StyleSheet.create({
     borderColor: '#dbeafe',
     padding: 14,
     gap: 10,
+    shadowColor: '#0f172a',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.04,
+    shadowRadius: 12,
+    elevation: 2,
+  },
+  emptyStateWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
   },
   selectedTitle: {
     fontWeight: '800',
