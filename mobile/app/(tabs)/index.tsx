@@ -1,3 +1,4 @@
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -7,18 +8,16 @@ import {
   Platform,
   Pressable,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   useWindowDimensions,
-  View,
+  View
 } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const API_URL = 'http://192.168.0.104:8080/predict';
-const AMBULANCE_URL = 'http://192.168.0.104:8080/ambulances';
+const API_URL = 'http://192.168.45.105:8080/predict';
+const AMBULANCE_URL = 'http://192.168.45.105:8080/ambulances';
 
 interface Etablissement {
   nom: string;
