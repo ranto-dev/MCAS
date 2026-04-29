@@ -2,11 +2,10 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialData } from "../data/mockData";
 import type {
   Admin,
-  Capacite,
+  Ambulance,
   DatabaseState,
   EntityKey,
   Etablissement,
-  Patient,
   Personnel,
 } from "../types/entities";
 
@@ -15,12 +14,20 @@ type UpdatePayload<K extends EntityKey> = DatabaseState[K][number];
 
 interface AdminDataContextValue {
   data: DatabaseState;
-  createItem: <K extends EntityKey>(entity: K, payload: InsertPayload<K>) => Promise<void>;
-  updateItem: <K extends EntityKey>(entity: K, payload: UpdatePayload<K>) => Promise<void>;
+  createItem: <K extends EntityKey>(
+    entity: K,
+    payload: InsertPayload<K>,
+  ) => Promise<void>;
+  updateItem: <K extends EntityKey>(
+    entity: K,
+    payload: UpdatePayload<K>,
+  ) => Promise<void>;
   deleteItem: (entity: EntityKey, id: number) => Promise<void>;
 }
 
-const AdminDataContext = createContext<AdminDataContextValue | undefined>(undefined);
+const AdminDataContext = createContext<AdminDataContextValue | undefined>(
+  undefined,
+);
 
 const getNextId = <K extends EntityKey>(rows: DatabaseState[K]) =>
   rows.length ? Math.max(...rows.map((row) => row.id)) + 1 : 1;
@@ -53,32 +60,24 @@ interface ApiPersonnel {
   etablissement_id: number;
 }
 
-interface ApiPatient {
+interface ApiAmbulance {
   ID: number;
-  nom: string;
-  prenom: string;
-  maladies: string;
-  etablissement_id: number;
-  date_admission: string | null;
-  date_sortie: string | null;
+  refference: string;
+  chauffeur_id: number;
   status: string;
 }
 
-interface ApiCapacite {
-  ID: number;
-  maladies: string;
-  espaces: number;
-  etablissement_id: number;
-}
-
 const ETABLISSEMENTS_API_URL =
-  import.meta.env.VITE_ETABLISSEMENTS_API_URL ?? "http://192.168.0.104:8080/etablissements";
-const ADMINS_API_URL = import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
+  import.meta.env.VITE_ETABLISSEMENTS_API_URL ??
+  "http://192.168.0.104:8080/etablissements";
+const ADMINS_API_URL =
+  import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
 const PERSONNEL_API_URL =
-  import.meta.env.VITE_PERSONNEL_API_URL ?? "http://192.168.0.104:8080/personnel";
-const PATIENTS_API_URL = import.meta.env.VITE_PATIENTS_API_URL ?? "http://192.168.0.104:8080/patients";
-const CAPACITES_API_URL =
-  import.meta.env.VITE_CAPACITES_API_URL ?? "http://192.168.0.104:8080/capacites";
+  import.meta.env.VITE_PERSONNEL_API_URL ??
+  "http://192.168.0.104:8080/personnel";
+const AMBULANCES_API_URL =
+  import.meta.env.VITE_AMBULANCES_API_URL ??
+  "http://192.168.0.104:8080/ambulances";
 
 const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   id: item.ID,
@@ -108,27 +107,11 @@ const mapApiPersonnel = (item: ApiPersonnel): Personnel => ({
   etablissement_id: item.etablissement_id,
 });
 
-const toDateInputFormat = (value: string | null): string => {
-  if (!value) return "";
-  return value.slice(0, 10);
-};
-
-const mapApiPatient = (item: ApiPatient): Patient => ({
+const mapApiAmbulance = (item: ApiAmbulance): Ambulance => ({
   id: item.ID,
-  nom: item.nom,
-  prenom: item.prenom,
-  maladies: item.maladies,
-  etablissement_id: item.etablissement_id,
-  date_admission: toDateInputFormat(item.date_admission),
-  date_sortie: toDateInputFormat(item.date_sortie),
+  refference: item.refference,
+  chauffeur_id: item.chauffeur_id,
   status: item.status,
-});
-
-const mapApiCapacite = (item: ApiCapacite): Capacite => ({
-  id: item.ID,
-  maladies: item.maladies,
-  espaces: item.espaces,
-  etablissement_id: item.etablissement_id,
 });
 
 export function AdminDataProvider({ children }: { children: React.ReactNode }) {
@@ -145,7 +128,8 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         }
 
         const payload = (await response.json()) as ApiEtablissement[];
-        const etablissements: Etablissement[] = payload.map(mapApiEtablissement);
+        const etablissements: Etablissement[] =
+          payload.map(mapApiEtablissement);
 
         if (isMounted) {
           setData((prev) => ({
@@ -154,7 +138,10 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
           }));
         }
       } catch (error) {
-        console.error("Impossible de charger les etablissements depuis l'API.", error);
+        console.error(
+          "Impossible de charger les etablissements depuis l'API.",
+          error,
+        );
       }
     };
 
@@ -196,64 +183,51 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
           }));
         }
       } catch (error) {
-        console.error("Impossible de charger les personnels depuis l'API.", error);
+        console.error(
+          "Impossible de charger les personnels depuis l'API.",
+          error,
+        );
       }
     };
 
-    const loadPatients = async () => {
+    const loadAmbulances = async () => {
       try {
-        const response = await fetch(PATIENTS_API_URL);
+        const response = await fetch(AMBULANCES_API_URL);
         if (!response.ok) {
-          throw new Error(`Echec API patients: ${response.status}`);
+          throw new Error(`Echec API ambulances: ${response.status}`);
         }
 
-        const payload = (await response.json()) as ApiPatient[];
-        const patients: Patient[] = payload.map(mapApiPatient);
+        const payload = (await response.json()) as ApiAmbulance[];
+        const ambulances: Ambulance[] = payload.map(mapApiAmbulance);
 
         if (isMounted) {
           setData((prev) => ({
             ...prev,
-            patients,
+            ambulance: ambulances,
           }));
         }
       } catch (error) {
-        console.error("Impossible de charger les patients depuis l'API.", error);
-      }
-    };
-
-    const loadCapacites = async () => {
-      try {
-        const response = await fetch(CAPACITES_API_URL);
-        if (!response.ok) {
-          throw new Error(`Echec API capacites: ${response.status}`);
-        }
-
-        const payload = (await response.json()) as ApiCapacite[];
-        const capacites: Capacite[] = payload.map(mapApiCapacite);
-
-        if (isMounted) {
-          setData((prev) => ({
-            ...prev,
-            capacite: capacites,
-          }));
-        }
-      } catch (error) {
-        console.error("Impossible de charger les capacites depuis l'API.", error);
+        console.error(
+          "Impossible de charger les ambulances depuis l'API.",
+          error,
+        );
       }
     };
 
     void loadEtablissements();
     void loadAdmins();
     void loadPersonnels();
-    void loadPatients();
-    void loadCapacites();
+    void loadAmbulances();
 
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const createItem: AdminDataContextValue["createItem"] = async (entity, payload) => {
+  const createItem: AdminDataContextValue["createItem"] = async (
+    entity,
+    payload,
+  ) => {
     if (entity === "etablissement") {
       try {
         const response = await fetch(ETABLISSEMENTS_API_URL, {
@@ -338,73 +312,38 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    if (entity === "patients") {
-      const { nom, prenom, maladies, etablissement_id, status } = payload as unknown as Omit<
-        Patient,
-        "id"
-      >;
+    if (entity === "ambulance") {
       try {
-        const response = await fetch(PATIENTS_API_URL, {
+        const { refference, chauffeur_id, status } = payload as Omit<
+          Ambulance,
+          "id"
+        >;
+        const response = await fetch(AMBULANCES_API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            nom,
-            prenom,
-            maladies,
-            etablissement_id,
+            refference,
+            chauffeur_id,
             status,
           }),
         });
 
         if (!response.ok) {
-          throw new Error(`Echec creation patient: ${response.status}`);
+          throw new Error(`Echec creation ambulance: ${response.status}`);
         }
 
-        const created = (await response.json()) as ApiPatient;
-        const createdPatient = mapApiPatient(created);
+        const created = (await response.json()) as ApiAmbulance;
+        const createdAmbulance = mapApiAmbulance(created);
 
         setData((prev) => ({
           ...prev,
-          patients: [...prev.patients, createdPatient],
+          ambulance: [...prev.ambulance, createdAmbulance],
         }));
         return;
       } catch (error) {
-        console.error("Impossible de creer le patient via l'API.", error);
-        return;
-      }
-    }
-
-    if (entity === "capacite") {
-      const { maladies, espaces, etablissement_id } = payload as unknown as Omit<Capacite, "id">;
-      try {
-        const response = await fetch(CAPACITES_API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            maladies,
-            espaces,
-            etablissement_id,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`Echec creation capacite: ${response.status}`);
-        }
-
-        const created = (await response.json()) as ApiCapacite;
-        const createdCapacite = mapApiCapacite(created);
-
-        setData((prev) => ({
-          ...prev,
-          capacite: [...prev.capacite, createdCapacite],
-        }));
-        return;
-      } catch (error) {
-        console.error("Impossible de creer la capacite via l'API.", error);
+        console.error("Impossible de creer l'ambulance via l'API.", error);
         return;
       }
     }
@@ -418,7 +357,10 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const updateItem: AdminDataContextValue["updateItem"] = async (entity, payload) => {
+  const updateItem: AdminDataContextValue["updateItem"] = async (
+    entity,
+    payload,
+  ) => {
     if (entity === "etablissement") {
       const { id, nom, region, contact, categorie } = payload as Etablissement;
       try {
@@ -436,7 +378,9 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         });
 
         if (!response.ok) {
-          throw new Error(`Echec modification etablissement: ${response.status}`);
+          throw new Error(
+            `Echec modification etablissement: ${response.status}`,
+          );
         }
 
         let updatedEtablissement: Etablissement = {
@@ -462,13 +406,17 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         }));
         return;
       } catch (error) {
-        console.error("Impossible de modifier l'etablissement via l'API.", error);
+        console.error(
+          "Impossible de modifier l'etablissement via l'API.",
+          error,
+        );
         return;
       }
     }
 
     if (entity === "personnel") {
-      const { id, nom, prenom, contact, poste, age, etablissement_id } = payload as Personnel;
+      const { id, nom, prenom, contact, poste, age, etablissement_id } =
+        payload as Personnel;
       try {
         const response = await fetch(`${PERSONNEL_API_URL}/${id}`, {
           method: "PUT",
@@ -508,7 +456,9 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
 
         setData((prev) => ({
           ...prev,
-          personnel: prev.personnel.map((row) => (row.id === id ? updatedPersonnel : row)),
+          personnel: prev.personnel.map((row) =>
+            row.id === id ? updatedPersonnel : row,
+          ),
         }));
         return;
       } catch (error) {
@@ -517,63 +467,79 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    if (entity === "patients") {
-      const { id, nom, prenom, maladies, etablissement_id, status } = payload as Patient;
+    if (entity === "ambulance") {
+      const { id, refference, chauffeur_id, status } = payload as Ambulance;
       try {
-        const response = await fetch(`${PATIENTS_API_URL}/${id}`, {
+        const response = await fetch(`${AMBULANCES_API_URL}/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            nom,
-            prenom,
-            maladies,
-            etablissement_id,
+            refference,
+            chauffeur_id,
             status,
           }),
         });
 
         if (!response.ok) {
-          throw new Error(`Echec modification patient: ${response.status}`);
+          throw new Error(`Echec modification ambulance: ${response.status}`);
         }
 
-        let updatedPatient: Patient = payload as Patient;
+        let updatedAmbulance: Ambulance = {
+          id,
+          refference,
+          chauffeur_id,
+          status,
+        };
+
         try {
-          const updatedFromApi = (await response.json()) as ApiPatient;
-          updatedPatient = mapApiPatient(updatedFromApi);
+          const updatedFromApi = (await response.json()) as ApiAmbulance;
+          updatedAmbulance = mapApiAmbulance(updatedFromApi);
         } catch {
           // Certaines APIs PUT ne renvoient pas de JSON; on garde les donnees envoyees.
         }
 
         setData((prev) => ({
           ...prev,
-          patients: prev.patients.map((row) => (row.id === id ? updatedPatient : row)),
+          ambulance: prev.ambulance.map((row) =>
+            row.id === id ? updatedAmbulance : row,
+          ),
         }));
         return;
       } catch (error) {
-        console.error("Impossible de modifier le patient via l'API.", error);
+        console.error("Impossible de modifier l'ambulance via l'API.", error);
         return;
       }
     }
 
     setData((prev) => ({
       ...prev,
-      [entity]: prev[entity].map((row) => (row.id === payload.id ? payload : row)),
+      [entity]: prev[entity].map((row) =>
+        row.id === payload.id ? payload : row,
+      ),
     }));
   };
 
-  const deleteItem: AdminDataContextValue["deleteItem"] = async (entity, id) => {
+  const deleteItem: AdminDataContextValue["deleteItem"] = async (
+    entity,
+    id,
+  ) => {
     if (entity === "etablissement") {
       try {
         const response = await fetch(`${ETABLISSEMENTS_API_URL}/${id}`, {
           method: "DELETE",
         });
         if (!response.ok) {
-          throw new Error(`Echec suppression etablissement: ${response.status}`);
+          throw new Error(
+            `Echec suppression etablissement: ${response.status}`,
+          );
         }
       } catch (error) {
-        console.error("Impossible de supprimer l'etablissement via l'API.", error);
+        console.error(
+          "Impossible de supprimer l'etablissement via l'API.",
+          error,
+        );
         return;
       }
     }
@@ -592,16 +558,16 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    if (entity === "patients") {
+    if (entity === "ambulance") {
       try {
-        const response = await fetch(`${PATIENTS_API_URL}/${id}`, {
+        const response = await fetch(`${AMBULANCES_API_URL}/${id}`, {
           method: "DELETE",
         });
         if (!response.ok) {
-          throw new Error(`Echec suppression patient: ${response.status}`);
+          throw new Error(`Echec suppression ambulance: ${response.status}`);
         }
       } catch (error) {
-        console.error("Impossible de supprimer le patient via l'API.", error);
+        console.error("Impossible de supprimer l'ambulance via l'API.", error);
         return;
       }
     }
@@ -614,9 +580,15 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
 
       if (entity === "etablissement") {
         next.admin = next.admin.filter((row) => row.etablissement_id !== id);
-        next.personnel = next.personnel.filter((row) => row.etablissement_id !== id);
-        next.patients = next.patients.filter((row) => row.etablissement_id !== id);
-        next.capacite = next.capacite.filter((row) => row.etablissement_id !== id);
+        next.personnel = next.personnel.filter(
+          (row) => row.etablissement_id !== id,
+        );
+        next.patients = next.patients.filter(
+          (row) => row.etablissement_id !== id,
+        );
+        next.capacite = next.capacite.filter(
+          (row) => row.etablissement_id !== id,
+        );
         const deletedPersonnelIds = prev.personnel
           .filter((row) => row.etablissement_id === id)
           .map((row) => row.id);
@@ -626,7 +598,9 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (entity === "personnel") {
-        next.ambulance = next.ambulance.filter((row) => row.chauffeur_id !== id);
+        next.ambulance = next.ambulance.filter(
+          (row) => row.chauffeur_id !== id,
+        );
       }
 
       return next;
@@ -643,7 +617,11 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
     [data],
   );
 
-  return <AdminDataContext.Provider value={value}>{children}</AdminDataContext.Provider>;
+  return (
+    <AdminDataContext.Provider value={value}>
+      {children}
+    </AdminDataContext.Provider>
+  );
 }
 
 export function useAdminData() {
