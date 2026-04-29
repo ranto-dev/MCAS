@@ -1,6 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialData } from "../data/mockData";
-import type { Admin, DatabaseState, EntityKey, Etablissement, Personnel } from "../types/entities";
+import type {
+  Admin,
+  Ambulance,
+  DatabaseState,
+  EntityKey,
+  Etablissement,
+  Personnel,
+} from "../types/entities";
 
 type InsertPayload<K extends EntityKey> = Omit<DatabaseState[K][number], "id">;
 type UpdatePayload<K extends EntityKey> = DatabaseState[K][number];
@@ -45,11 +52,20 @@ interface ApiPersonnel {
   etablissement_id: number;
 }
 
+interface ApiAmbulance {
+  ID: number;
+  refference: string;
+  chauffeur_id: number;
+  status: string;
+}
+
 const ETABLISSEMENTS_API_URL =
   import.meta.env.VITE_ETABLISSEMENTS_API_URL ?? "http://192.168.0.104:8080/etablissements";
 const ADMINS_API_URL = import.meta.env.VITE_ADMINS_API_URL ?? "http://192.168.0.104:8080/admins";
 const PERSONNEL_API_URL =
   import.meta.env.VITE_PERSONNEL_API_URL ?? "http://192.168.0.104:8080/personnel";
+const AMBULANCES_API_URL =
+  import.meta.env.VITE_AMBULANCES_API_URL ?? "http://192.168.0.104:8080/ambulances";
 
 const mapApiEtablissement = (item: ApiEtablissement): Etablissement => ({
   id: item.ID,
@@ -77,6 +93,13 @@ const mapApiPersonnel = (item: ApiPersonnel): Personnel => ({
   poste: item.poste,
   age: item.age,
   etablissement_id: item.etablissement_id,
+});
+
+const mapApiAmbulance = (item: ApiAmbulance): Ambulance => ({
+  id: item.ID,
+  refference: item.refference,
+  chauffeur_id: item.chauffeur_id,
+  status: item.status,
 });
 
 export function AdminDataProvider({ children }: { children: React.ReactNode }) {
@@ -148,9 +171,31 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
+    const loadAmbulances = async () => {
+      try {
+        const response = await fetch(AMBULANCES_API_URL);
+        if (!response.ok) {
+          throw new Error(`Echec API ambulances: ${response.status}`);
+        }
+
+        const payload = (await response.json()) as ApiAmbulance[];
+        const ambulances: Ambulance[] = payload.map(mapApiAmbulance);
+
+        if (isMounted) {
+          setData((prev) => ({
+            ...prev,
+            ambulance: ambulances,
+          }));
+        }
+      } catch (error) {
+        console.error("Impossible de charger les ambulances depuis l'API.", error);
+      }
+    };
+
     void loadEtablissements();
     void loadAdmins();
     void loadPersonnels();
+    void loadAmbulances();
 
     return () => {
       isMounted = false;
@@ -238,6 +283,39 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         return;
       } catch (error) {
         console.error("Impossible de creer le personnel via l'API.", error);
+        return;
+      }
+    }
+
+    if (entity === "ambulance") {
+      try {
+        const { refference, chauffeur_id, status } = payload as Omit<Ambulance, "id">;
+        const response = await fetch(AMBULANCES_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            refference,
+            chauffeur_id,
+            status,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec creation ambulance: ${response.status}`);
+        }
+
+        const created = (await response.json()) as ApiAmbulance;
+        const createdAmbulance = mapApiAmbulance(created);
+
+        setData((prev) => ({
+          ...prev,
+          ambulance: [...prev.ambulance, createdAmbulance],
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de creer l'ambulance via l'API.", error);
         return;
       }
     }
@@ -350,6 +428,50 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    if (entity === "ambulance") {
+      const { id, refference, chauffeur_id, status } = payload as Ambulance;
+      try {
+        const response = await fetch(`${AMBULANCES_API_URL}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            refference,
+            chauffeur_id,
+            status,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Echec modification ambulance: ${response.status}`);
+        }
+
+        let updatedAmbulance: Ambulance = {
+          id,
+          refference,
+          chauffeur_id,
+          status,
+        };
+
+        try {
+          const updatedFromApi = (await response.json()) as ApiAmbulance;
+          updatedAmbulance = mapApiAmbulance(updatedFromApi);
+        } catch {
+          // Certaines APIs PUT ne renvoient pas de JSON; on garde les donnees envoyees.
+        }
+
+        setData((prev) => ({
+          ...prev,
+          ambulance: prev.ambulance.map((row) => (row.id === id ? updatedAmbulance : row)),
+        }));
+        return;
+      } catch (error) {
+        console.error("Impossible de modifier l'ambulance via l'API.", error);
+        return;
+      }
+    }
+
     setData((prev) => ({
       ...prev,
       [entity]: prev[entity].map((row) => (row.id === payload.id ? payload : row)),
@@ -381,6 +503,20 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         console.error("Impossible de supprimer le personnel via l'API.", error);
+        return;
+      }
+    }
+
+    if (entity === "ambulance") {
+      try {
+        const response = await fetch(`${AMBULANCES_API_URL}/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`Echec suppression ambulance: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Impossible de supprimer l'ambulance via l'API.", error);
         return;
       }
     }
